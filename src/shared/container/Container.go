@@ -8,6 +8,7 @@ import (
 	"github.com/marcosfrancomarinho/go-first-project/src/infrastructure/geradorid"
 	"github.com/marcosfrancomarinho/go-first-project/src/infrastructure/repository"
 	"github.com/marcosfrancomarinho/go-first-project/src/presentation/controllers"
+	"github.com/marcosfrancomarinho/go-first-project/src/presentation/middlewares"
 )
 
 type Container struct{}
@@ -21,13 +22,15 @@ func GetInstance() *Container {
 	return instance
 }
 
-type Controllers struct {
-	RegisterUser interfaces.HttpControllers
-	LoginUser    interfaces.HttpControllers
+type handlers struct {
+	RegisterUserControllers      interfaces.HttpControllers
+	LoginUserControllers         interfaces.HttpControllers
+	UserAuthenticatorMiddlewares interfaces.HttpControllers
 }
 
-func (c *Container) Dependencies() *Controllers {
+func (c *Container) Dependencies() *handlers {
 	encryptor := encryptor.BcryptPasswordEncryptor{}
+	userAuthenticator := auth.JwtUserAuthenticator{}
 
 	creatorUser := repository.GormCreatorUser{}
 	idGerador := geradorid.UUID{}
@@ -35,12 +38,14 @@ func (c *Container) Dependencies() *Controllers {
 	registerUserControllers := controllers.NewRegisterUserControllers(registerUserUseCase)
 
 	findorUser := repository.GormFindorUser{}
-	userAuthenticator := auth.JwtUserAuthenticator{}
 	loginUserUseCase := usecase.NewLoginUserUseCase(&encryptor, &userAuthenticator, &findorUser)
 	loginUserControllers := controllers.NewLoginUserControllers(loginUserUseCase)
 
-	return &Controllers{
-		RegisterUser: registerUserControllers,
-		LoginUser:    loginUserControllers,
+	userAuthenticatorMiddlewares := middlewares.NewUserAuthenticatorMiddlewares(&userAuthenticator)
+
+	return &handlers{
+		RegisterUserControllers:      registerUserControllers,
+		LoginUserControllers:         loginUserControllers,
+		UserAuthenticatorMiddlewares: userAuthenticatorMiddlewares,
 	}
 }

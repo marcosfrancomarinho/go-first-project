@@ -2,16 +2,16 @@ package auth
 
 import (
 	"errors"
+	"fmt"
+	"os"
+	"time"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/joho/godotenv"
 	"github.com/marcosfrancomarinho/go-first-project/src/domain/entities"
 	"github.com/marcosfrancomarinho/go-first-project/src/domain/valuesobject"
-	"os"
-	"time"
 )
 
 type JwtUserAuthenticator struct{}
-
 type claims struct {
 	UserId string `json:"userId"`
 	jwt.RegisteredClaims
@@ -54,6 +54,30 @@ func (j *JwtUserAuthenticator) GenerateToken(user *entities.UserRegister) (*valu
 	return createdToken, nil
 }
 
-func (j *JwtUserAuthenticator) ValidateToken(token *valuesobject.Token) error {
-	return errors.New("method no implement")
+func (j *JwtUserAuthenticator) ValidateToken(token *valuesobject.Token) (*valuesobject.ID, error) {
+	jwtKey, err := getKeyEnv("KEY_SECRET")
+	if err != nil {
+		return nil, err
+	}
+	parsedToken, err := jwt.ParseWithClaims(token.GetValue(), &claims{}, func(t *jwt.Token) (any, error) {
+		if _, ok := t.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, fmt.Errorf("método de assinatura inesperado: %v", t.Header["alg"])
+		}
+		return jwtKey, nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	if !parsedToken.Valid {
+		return nil, errors.New("token invalido")
+	}
+	claims, ok := parsedToken.Claims.(*claims)
+	if !ok {
+		return nil, errors.New("falha ao converter claims")
+	}
+	idUser, err := valuesobject.NewID(claims.UserId)
+	if err != nil {
+		return nil, err
+	}
+	return idUser, nil
 }

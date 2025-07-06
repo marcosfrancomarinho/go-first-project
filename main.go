@@ -12,5 +12,4 @@ func main() {
 	router := routers.NewRouters(server)
 	router.Register(container)
 	server.Run(8080)
-
 }

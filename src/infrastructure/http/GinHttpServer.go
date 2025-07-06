@@ -17,10 +17,17 @@ func NewGinHttpServer() *GinHttpServer {
 	}
 }
 
-func (g *GinHttpServer) On(method string, path string, controllers interfaces.HttpControllers) {
+func (g *GinHttpServer) On(method string, path string, controllers interfaces.HttpControllers, middlewares ...interfaces.HttpControllers) {
 
 	g.engine.Handle(method, path, func(ctx *gin.Context) {
 		httpContext := NewGinHttpContext(ctx)
+
+		for _, middleware := range middlewares {
+			middleware.Execute(httpContext)
+			if ctx.Writer.Written() {
+				return
+			}
+		}
 		controllers.Execute(httpContext)
 	})
 }

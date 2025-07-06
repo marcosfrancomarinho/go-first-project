@@ -32,6 +32,7 @@ func (l *LoginUserControllers) Execute(httpContext interfaces.HttpContext) {
 		httpContext.SendError(err)
 		return
 	}
-	
-	httpContext.Send(200, output)
+
+	httpContext.Send(200, output.ToObject(), output.GetToken())
+
 }

@@ -7,5 +7,5 @@ import (
 
 type UserAuthenticator interface {
 	GenerateToken(user *entities.UserRegister) (*valuesobject.Token, error)
-	ValidateToken(token *valuesobject.Token) error
+	ValidateToken(token *valuesobject.Token) (*valuesobject.ID, error)
 }
