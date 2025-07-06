@@ -1,12 +1,12 @@
 package container
 
 import (
-	"github.com/marcosfrancomarinho/src/application/usecase"
-	"github.com/marcosfrancomarinho/src/domain/interfaces"
-	"github.com/marcosfrancomarinho/src/infrastructure/encryptor"
-	"github.com/marcosfrancomarinho/src/infrastructure/geradorid"
-	"github.com/marcosfrancomarinho/src/infrastructure/repository"
-	"github.com/marcosfrancomarinho/src/presentation/controllers"
+	"github.com/marcosfrancomarinho/go-first-project/src/application/usecase"
+	"github.com/marcosfrancomarinho/go-first-project/src/domain/interfaces"
+	"github.com/marcosfrancomarinho/go-first-project/src/infrastructure/encryptor"
+	"github.com/marcosfrancomarinho/go-first-project/src/infrastructure/geradorid"
+	"github.com/marcosfrancomarinho/go-first-project/src/infrastructure/repository"
+	"github.com/marcosfrancomarinho/go-first-project/src/presentation/controllers"
 )
 
 type Container struct{}

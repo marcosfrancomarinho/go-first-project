@@ -1,7 +1,7 @@
 package encryptor
 
 import (
-	"github.com/marcosfrancomarinho/src/domain/valuesobject"
+	"github.com/marcosfrancomarinho/go-first-project/src/domain/valuesobject"
 	"golang.org/x/crypto/bcrypt"
 )
 

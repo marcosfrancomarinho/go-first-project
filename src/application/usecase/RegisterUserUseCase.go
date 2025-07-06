@@ -1,10 +1,10 @@
 package usecase
 
 import (
-	"github.com/marcosfrancomarinho/src/application/dto"
-	"github.com/marcosfrancomarinho/src/domain/entities"
-	"github.com/marcosfrancomarinho/src/domain/interfaces"
-	"github.com/marcosfrancomarinho/src/domain/valuesobject"
+	"github.com/marcosfrancomarinho/go-first-project/src/application/dto"
+	"github.com/marcosfrancomarinho/go-first-project/src/domain/entities"
+	"github.com/marcosfrancomarinho/go-first-project/src/domain/interfaces"
+	"github.com/marcosfrancomarinho/go-first-project/src/domain/valuesobject"
 )
 
 type RegisterUserUseCase struct {

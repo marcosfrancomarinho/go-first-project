@@ -1,8 +1,8 @@
 package routers
 
 import (
-	"github.com/marcosfrancomarinho/src/domain/interfaces"
-	"github.com/marcosfrancomarinho/src/shared/container"
+	"github.com/marcosfrancomarinho/go-first-project/src/domain/interfaces"
+	"github.com/marcosfrancomarinho/go-first-project/src/shared/container"
 )
 
 type Routers struct {

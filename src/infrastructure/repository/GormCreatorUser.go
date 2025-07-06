@@ -1,8 +1,8 @@
 package repository
 
 import (
-	"github.com/marcosfrancomarinho/src/domain/entities"
-	"github.com/marcosfrancomarinho/src/infrastructure/database"
+	"github.com/marcosfrancomarinho/go-first-project/src/domain/entities"
+	"github.com/marcosfrancomarinho/go-first-project/src/infrastructure/database"
 )
 
 type GormCreatorUser struct{}

@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/marcosfrancomarinho/src/infrastructure/http"
-	"github.com/marcosfrancomarinho/src/presentation/routers"
-	"github.com/marcosfrancomarinho/src/shared/container"
+	"github.com/marcosfrancomarinho/go-first-project/src/infrastructure/http"
+	"github.com/marcosfrancomarinho/go-first-project/src/presentation/routers"
+	"github.com/marcosfrancomarinho/go-first-project/src/shared/container"
 )
 
 func main() {

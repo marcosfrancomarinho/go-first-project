@@ -1,6 +1,6 @@
 package entities
 
-import "github.com/marcosfrancomarinho/src/domain/valuesobject"
+import "github.com/marcosfrancomarinho/go-first-project/src/domain/valuesobject"
 
 type UserRegister struct {
 	name     *valuesobject.Name

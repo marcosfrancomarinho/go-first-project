@@ -1,9 +1,9 @@
 package controllers
 
 import (
-	"github.com/marcosfrancomarinho/src/application/dto"
-	"github.com/marcosfrancomarinho/src/application/usecase"
-	"github.com/marcosfrancomarinho/src/domain/interfaces"
+	"github.com/marcosfrancomarinho/go-first-project/src/application/dto"
+	"github.com/marcosfrancomarinho/go-first-project/src/application/usecase"
+	"github.com/marcosfrancomarinho/go-first-project/src/domain/interfaces"
 )
 
 type RegisterUserControllers struct {

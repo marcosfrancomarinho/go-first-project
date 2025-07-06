@@ -2,8 +2,9 @@ package http
 
 import (
 	"fmt"
+
 	"github.com/gin-gonic/gin"
-	 "github.com/marcosfrancomarinho/src/domain/interfaces"
+	"github.com/marcosfrancomarinho/go-first-project/src/domain/interfaces"
 )
 
 type GinHttpServer struct {

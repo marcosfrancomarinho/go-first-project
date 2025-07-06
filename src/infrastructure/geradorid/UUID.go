@@ -2,7 +2,7 @@ package geradorid
 
 import (
 	"github.com/google/uuid"
-	"github.com/marcosfrancomarinho/src/domain/valuesobject"
+	"github.com/marcosfrancomarinho/go-first-project/src/domain/valuesobject"
 )
 
 type UUID struct {
