@@ -16,6 +16,8 @@ func NewRouters(server interfaces.HttpServer) *Routers {
 func (r *Routers) Register(container *container.Container) {
 	controllers := container.Dependencies()
 
-	r.server.On("POST", "/register", controllers.CreatorUser)
+	r.server.On("POST", "/register", controllers.RegisterUser)
+	
+	r.server.On("POST", "/login", controllers.LoginUser)
 
 }

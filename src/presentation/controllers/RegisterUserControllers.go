@@ -14,14 +14,14 @@ func NewRegisterUserControllers(registerUserUseCase *usecase.RegisterUserUseCase
 	return &RegisterUserControllers{registerUserUseCase: registerUserUseCase}
 }
 
-type Raw struct {
+type RawRegister struct {
 	Name     string
 	Email    string
 	Password string
 }
 
 func (r *RegisterUserControllers) Execute(httpContext interfaces.HttpContext) {
-	var raw Raw
+	var raw RawRegister
 	err := httpContext.GetBody(&raw)
 	if err != nil {
 		httpContext.SendError(err)

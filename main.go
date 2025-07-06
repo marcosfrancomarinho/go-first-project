@@ -8,7 +8,7 @@ import (
 
 func main() {
 	server := http.NewGinHttpServer()
-	container := &container.Container{}
+	container := container.GetInstance()
 	router := routers.NewRouters(server)
 	router.Register(container)
 	server.Run(8080)

@@ -14,3 +14,10 @@ func (b *BcryptPasswordEncryptor) Encryptor(password *valuesobject.Password) (*v
 	return hashPassword, err
 
 }
+
+func (b *BcryptPasswordEncryptor) ValidatePassword(password string, encryptedPassword string) error {
+	return bcrypt.CompareHashAndPassword(
+		[]byte(encryptedPassword),
+		[]byte(password),
+	)
+}
