@@ -1,15 +1,15 @@
 package entities
 
-import V "github.com/marcosfrancomarinho/src/domain/valuesobject"
+import "github.com/marcosfrancomarinho/src/domain/valuesobject"
 
 type UserRegister struct {
-	name     *V.Name
-	email    *V.Email
-	password *V.Password
-	id       *V.ID
+	name     *valuesobject.Name
+	email    *valuesobject.Email
+	password *valuesobject.Password
+	id       *valuesobject.ID
 }
 
-func NewUserRegister(name *V.Name, email *V.Email, password *V.Password, id *V.ID) (*UserRegister, error) {
+func NewUserRegister(name *valuesobject.Name, email *valuesobject.Email, password *valuesobject.Password, id *valuesobject.ID) (*UserRegister, error) {
 	return &UserRegister{name: name, email: email, password: password, id: id}, nil
 }
 
@@ -26,6 +26,6 @@ func (u *UserRegister) GetID() string {
 	return u.id.GetValue()
 }
 
-func (u *UserRegister) UpdatePassword(password *V.Password) {
+func (u *UserRegister) UpdatePassword(password *valuesobject.Password) {
 	u.password = password
 }

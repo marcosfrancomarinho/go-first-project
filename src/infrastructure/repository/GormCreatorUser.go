@@ -1,16 +1,16 @@
 package repository
 
 import (
-	E "github.com/marcosfrancomarinho/src/domain/entities"
-	D "github.com/marcosfrancomarinho/src/infrastructure/database"
+	"github.com/marcosfrancomarinho/src/domain/entities"
+	"github.com/marcosfrancomarinho/src/infrastructure/database"
 )
 
 type GormCreatorUser struct{}
 
-func (g *GormCreatorUser) Create(user *E.UserRegister) error {
-	var db D.Database
+func (g *GormCreatorUser) Create(user *entities.UserRegister) error {
+	var db database.Database
 	db.Connection()
-	datas := D.User{
+	datas := database.User{
 		Id:       user.GetID(),
 		Name:     user.GetName(),
 		Email:    user.GetEmail(),

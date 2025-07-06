@@ -1,6 +1,8 @@
 package http
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+)
 
 type GinHttpContext struct {
 	ctx *gin.Context

@@ -1,15 +1,15 @@
 package main
 
 import (
-	h "github.com/marcosfrancomarinho/src/infrastructure/http"
-	r "github.com/marcosfrancomarinho/src/presentation/routers"
-	c "github.com/marcosfrancomarinho/src/shared/container"
+	"github.com/marcosfrancomarinho/src/infrastructure/http"
+	"github.com/marcosfrancomarinho/src/presentation/routers"
+	"github.com/marcosfrancomarinho/src/shared/container"
 )
 
 func main() {
-	server := h.NewGinHttpServer()
-	container := &c.Container{}
-	router := r.NewRouters(server)
+	server := http.NewGinHttpServer()
+	container := &container.Container{}
+	router := routers.NewRouters(server)
 	router.Register(container)
 	server.Run(8080)
 

@@ -1,35 +1,35 @@
 package usecase
 
 import (
-	D "github.com/marcosfrancomarinho/src/application/DTO"
-	E "github.com/marcosfrancomarinho/src/domain/entities"
-	I "github.com/marcosfrancomarinho/src/domain/interfaces"
-	V "github.com/marcosfrancomarinho/src/domain/valuesobject"
+	"github.com/marcosfrancomarinho/src/application/dto"
+	"github.com/marcosfrancomarinho/src/domain/entities"
+	"github.com/marcosfrancomarinho/src/domain/interfaces"
+	"github.com/marcosfrancomarinho/src/domain/valuesobject"
 )
 
 type RegisterUserUseCase struct {
-	createUser I.CreateUser
-	gerator    I.GeratorID
-	encryptor  I.PasswordEncryptor
+	createUser interfaces.CreateUser
+	gerator    interfaces.GeratorID
+	encryptor  interfaces.PasswordEncryptor
 }
 
-func NewRegisterUserUseCase(createUser I.CreateUser, gerator I.GeratorID, encryptor I.PasswordEncryptor) *RegisterUserUseCase {
+func NewRegisterUserUseCase(createUser interfaces.CreateUser, gerator interfaces.GeratorID, encryptor interfaces.PasswordEncryptor) *RegisterUserUseCase {
 	return &RegisterUserUseCase{createUser: createUser, gerator: gerator, encryptor: encryptor}
 }
 
-func (r *RegisterUserUseCase) Register(userDTO *D.RequestRegisterUserDTO) (*D.ResponseRegisterUserDTO, error) {
+func (r *RegisterUserUseCase) Register(userDTO *dto.RequestRegisterUserDTO) (*dto.ResponseRegisterUserDTO, error) {
 
-	name, err := V.NewName(userDTO.Name)
+	name, err := valuesobject.NewName(userDTO.Name)
 	if err != nil {
 		return nil, err
 	}
 
-	email, err := V.NewEmail(userDTO.Email)
+	email, err := valuesobject.NewEmail(userDTO.Email)
 	if err != nil {
 		return nil, err
 	}
 
-	password, err := V.NewPassword(userDTO.Password)
+	password, err := valuesobject.NewPassword(userDTO.Password)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ func (r *RegisterUserUseCase) Register(userDTO *D.RequestRegisterUserDTO) (*D.Re
 		return nil, err
 	}
 
-	userRegister, err := E.NewUserRegister(name, email, password, id)
+	userRegister, err := entities.NewUserRegister(name, email, password, id)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ func (r *RegisterUserUseCase) Register(userDTO *D.RequestRegisterUserDTO) (*D.Re
 		return nil, err
 	}
 
-	return &D.ResponseRegisterUserDTO{
+	return &dto.ResponseRegisterUserDTO{
 		Message: "usuario criado com sucesso.",
 		IdUser:  id.GetValue(),
 	}, nil

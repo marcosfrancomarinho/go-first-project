@@ -3,7 +3,7 @@ package http
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	I "github.com/marcosfrancomarinho/src/domain/interfaces"
+	 "github.com/marcosfrancomarinho/src/domain/interfaces"
 )
 
 type GinHttpServer struct {
@@ -16,7 +16,7 @@ func NewGinHttpServer() *GinHttpServer {
 	}
 }
 
-func (g *GinHttpServer) On(method string, path string, controllers I.HttpControllers) {
+func (g *GinHttpServer) On(method string, path string, controllers interfaces.HttpControllers) {
 
 	g.engine.Handle(method, path, func(ctx *gin.Context) {
 		httpContext := NewGinHttpContext(ctx)

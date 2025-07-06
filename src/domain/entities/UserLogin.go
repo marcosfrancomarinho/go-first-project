@@ -1,12 +1,12 @@
 package entities
 
-import V "github.com/marcosfrancomarinho/src/domain/valuesobject"
+import  "github.com/marcosfrancomarinho/src/domain/valuesobject"
 
 type UserLogin struct {
-	email    V.Email
-	password V.Password
+	email    valuesobject.Email
+	password valuesobject.Password
 }
 
-func NewUserLogin(email V.Email, password V.Password, id V.ID) (*UserLogin, error) {
+func NewUserLogin(email valuesobject.Email, password valuesobject.Password, id valuesobject.ID) (*UserLogin, error) {
 	return &UserLogin{email: email, password: password}, nil
 }

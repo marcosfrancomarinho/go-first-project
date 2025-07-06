@@ -1,21 +1,21 @@
 package routers
 
 import (
-	I "github.com/marcosfrancomarinho/src/domain/interfaces"
-	C "github.com/marcosfrancomarinho/src/shared/container"
+	"github.com/marcosfrancomarinho/src/domain/interfaces"
+	"github.com/marcosfrancomarinho/src/shared/container"
 )
 
 type Routers struct {
-	server I.HttpServer
+	server interfaces.HttpServer
 }
 
-func NewRouters(server I.HttpServer) *Routers {
+func NewRouters(server interfaces.HttpServer) *Routers {
 	return &Routers{server: server}
 }
 
-func (r *Routers) Register(container *C.Container) {
-	controllers := container.Dependecies()
+func (r *Routers) Register(container *container.Container) {
+	controllers := container.Dependencies()
 
-	r.server.On("POST", "/register", controllers["creator-user"])
+	r.server.On("POST", "/register", controllers.CreatorUser)
 
 }

@@ -2,7 +2,7 @@
 POST  http://localhost:8080/register
 
 {
-    "Name":"larissa",
-    "Email":"larissa@gmail.com",
+    "Name":"maria",
+    "Email":"maria7t489@gmail.com",
     "Password":"@1S23478885"
 }

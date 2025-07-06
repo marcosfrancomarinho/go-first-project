@@ -1,25 +1,29 @@
 package container
 
 import (
-	U "github.com/marcosfrancomarinho/src/application/usecase"
-	I "github.com/marcosfrancomarinho/src/domain/interfaces"
-	E "github.com/marcosfrancomarinho/src/infrastructure/encryptor"
-	G "github.com/marcosfrancomarinho/src/infrastructure/geradorid"
-	R "github.com/marcosfrancomarinho/src/infrastructure/repository"
-	C "github.com/marcosfrancomarinho/src/presentation/controllers"
+	"github.com/marcosfrancomarinho/src/application/usecase"
+	"github.com/marcosfrancomarinho/src/domain/interfaces"
+	"github.com/marcosfrancomarinho/src/infrastructure/encryptor"
+	"github.com/marcosfrancomarinho/src/infrastructure/geradorid"
+	"github.com/marcosfrancomarinho/src/infrastructure/repository"
+	"github.com/marcosfrancomarinho/src/presentation/controllers"
 )
 
 type Container struct{}
 
-func (c *Container) Dependecies() map[string]I.HttpControllers {
+type Controllers struct {
+	CreatorUser interfaces.HttpControllers
+}
 
-	creatorUser := R.GormCreatorUser{}
-	idGerador := G.UUID{}
-	encryptor := E.BcryptPasswordEncryptor{}
-	creatorUserUseCase := U.NewRegisterUserUseCase(&creatorUser, &idGerador, &encryptor)
-	creatorUserControllers := C.NewRegisterUserControllers(creatorUserUseCase)
+func (c *Container) Dependencies() *Controllers {
 
-	return map[string]I.HttpControllers{
-		"creator-user": creatorUserControllers,
+	creatorUser := repository.GormCreatorUser{}
+	idGerador := geradorid.UUID{}
+	encryptor := encryptor.BcryptPasswordEncryptor{}
+	creatorUserUseCase := usecase.NewRegisterUserUseCase(&creatorUser, &idGerador, &encryptor)
+	creatorUserControllers := controllers.NewRegisterUserControllers(creatorUserUseCase)
+
+	return &Controllers{
+		CreatorUser: creatorUserControllers,
 	}
 }

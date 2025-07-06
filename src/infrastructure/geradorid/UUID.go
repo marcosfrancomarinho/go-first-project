@@ -2,14 +2,14 @@ package geradorid
 
 import (
 	"github.com/google/uuid"
-	V "github.com/marcosfrancomarinho/src/domain/valuesobject"
+	"github.com/marcosfrancomarinho/src/domain/valuesobject"
 )
 
 type UUID struct {
 }
 
-func (u *UUID) Generate() (*V.ID, error) {
+func (u *UUID) Generate() (*valuesobject.ID, error) {
 	hash := uuid.New().String()
-	id, err := V.NewID(hash)
+	id, err := valuesobject.NewID(hash)
 	return id, err
 }
