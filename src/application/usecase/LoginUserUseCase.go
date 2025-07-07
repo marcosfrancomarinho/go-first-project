@@ -26,25 +26,28 @@ func (l *LoginUserUseCase) Login(userDTO *dto.RequestLoginUserDTO) (*dto.Respons
 	if err != nil {
 		return nil, err
 	}
+
 	password, err := valuesobject.NewPassword(userDTO.Password)
 	if err != nil {
 		return nil, err
 	}
-	userLogin, err := entities.NewUserLogin(email, password)
-	if err != nil {
-		return nil, err
-	}
+
+	userLogin := entities.NewUserLogin(email, password)
+	
 	foundUser, err := l.findorUser.FindByEmail(userLogin)
 	if err != nil {
 		return nil, err
 	}
+
 	if err := l.encryptor.ValidatePassword(password.GetValue(), foundUser.GetPassword()); err != nil {
 		return nil, err
 	}
+
 	token, err := l.userAuthenticator.GenerateToken(foundUser)
 	if err != nil {
 		return nil, err
 	}
+	
 	return &dto.ResponseLoginUserDTO{
 		IdUser:  foundUser.GetID(),
 		Message: "usuario logado com sucesso",

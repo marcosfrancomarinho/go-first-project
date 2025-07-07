@@ -2,7 +2,6 @@ package http
 
 import (
 	"errors"
-
 	"github.com/gin-gonic/gin"
 )
 

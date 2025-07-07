@@ -24,13 +24,13 @@ func (u *UserLoginMappers) GetUser(user *database.User) (*entities.UserRegister,
 	if err != nil {
 		return nil, err
 	}
+
 	id, err := valuesobject.NewID(user.Id)
 	if err != nil {
 		return nil, err
 	}
-	userFound, err := entities.NewUserRegister(name, email, password, id)
-	if err != nil {
-		return nil, err
-	}
+	
+	userFound := entities.NewUserRegister(name, email, password, id)
+
 	return userFound, nil
 }

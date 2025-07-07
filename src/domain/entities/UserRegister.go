@@ -9,8 +9,13 @@ type UserRegister struct {
 	id       *valuesobject.ID
 }
 
-func NewUserRegister(name *valuesobject.Name, email *valuesobject.Email, password *valuesobject.Password, id *valuesobject.ID) (*UserRegister, error) {
-	return &UserRegister{name: name, email: email, password: password, id: id}, nil
+func NewUserRegister(
+	name *valuesobject.Name,
+	email *valuesobject.Email,
+	password *valuesobject.Password,
+	id *valuesobject.ID,
+) *UserRegister {
+	return &UserRegister{name: name, email: email, password: password, id: id}
 }
 
 func (u *UserRegister) GetName() string {

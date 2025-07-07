@@ -13,7 +13,11 @@ type RegisterUserUseCase struct {
 	encryptor  interfaces.PasswordEncryptor
 }
 
-func NewRegisterUserUseCase(createUser interfaces.CreateUser, gerator interfaces.GeratorID, encryptor interfaces.PasswordEncryptor) *RegisterUserUseCase {
+func NewRegisterUserUseCase(
+	createUser interfaces.CreateUser,
+	gerator interfaces.GeratorID,
+	encryptor interfaces.PasswordEncryptor,
+) *RegisterUserUseCase {
 	return &RegisterUserUseCase{createUser: createUser, gerator: gerator, encryptor: encryptor}
 }
 
@@ -39,10 +43,7 @@ func (r *RegisterUserUseCase) Register(userDTO *dto.RequestRegisterUserDTO) (*dt
 		return nil, err
 	}
 
-	userRegister, err := entities.NewUserRegister(name, email, password, id)
-	if err != nil {
-		return nil, err
-	}
+	userRegister := entities.NewUserRegister(name, email, password, id)
 
 	encryptedPassword, err := r.encryptor.Encryptor(password)
 	if err != nil {
@@ -51,8 +52,7 @@ func (r *RegisterUserUseCase) Register(userDTO *dto.RequestRegisterUserDTO) (*dt
 
 	userRegister.UpdatePassword(encryptedPassword)
 
-	err = r.createUser.Create(userRegister)
-	if err != nil {
+	if err = r.createUser.Create(userRegister); err != nil {
 		return nil, err
 	}
 
