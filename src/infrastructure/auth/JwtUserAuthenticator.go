@@ -19,14 +19,14 @@ type claims struct {
 }
 
 func getKeyEnv(key string) ([]byte, error) {
-	keySecret := os.Getenv(key)
-
-	if len(keySecret) != 0 {
-		return []byte(keySecret), nil
+	if os.Getenv("GIN_MODE") != "release" {
+		_ = godotenv.Load()
 	}
 
-	if err := godotenv.Load(); err != nil {
-		return nil, err
+	keySecret := os.Getenv(key)
+	
+	if keySecret == "" {
+		return nil, fmt.Errorf("variável de ambiente %s não definida", key)
 	}
 
 	return []byte(keySecret), nil
