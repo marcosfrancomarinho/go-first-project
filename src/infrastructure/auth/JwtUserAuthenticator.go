@@ -19,10 +19,15 @@ type claims struct {
 }
 
 func getKeyEnv(key string) ([]byte, error) {
+	keySecret := os.Getenv(key)
+
+	if len(keySecret) != 0 {
+		return []byte(keySecret), nil
+	}
+
 	if err := godotenv.Load(); err != nil {
 		return nil, err
 	}
-	keySecret := os.Getenv(key)
 
 	return []byte(keySecret), nil
 }
