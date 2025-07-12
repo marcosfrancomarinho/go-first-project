@@ -1,17 +1,29 @@
 ###
 POST  http://localhost:8080/register
-Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMTIyNWIyMy1iMDI0LTQ1YTctODkwMi0xYmNhYWMyNjk3YTIiLCJpc3MiOiJhcHAtdXNlciIsImV4cCI6MTc1MTgzMDIxN30.mTALIt7f6BXA5HAR9AoCXQLR1G0y9WMvt-uTHu-qcZQ
+Content-Type: application/json
 
 {
     "Name":"marcos",
-     "Email":"marcosfrancomarinho123@4gmail.com",
+    "Email":"marcosfrancomarinho123@4gmail.com",
     "Password":"@1S23478885"
 }
 
 ###
 POST  http://localhost:8080/login
+Content-Type: application/json 
 
 {
     "Email":"marcosfrancomarinho@gmail.com",
     "Password":"@1S23478885"
+}
+
+###
+POST  http://localhost:8080/product
+Content-Type: application/json
+Token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMTIyNWIyMy1iMDI0LTQ1YTctODkwMi0xYmNhYWMyNjk3YTIiLCJleHAiOjE3NTIzMzgyOTF9.mSpK_UmK-1l3aJboNi5SeCaIbO7Vyce9yoG7_mzLg4o
+
+{
+    "Name":"geladeira",
+    "Price":500,
+    "Quantity":5
 }

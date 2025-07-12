@@ -26,14 +26,15 @@ type handlers struct {
 	RegisterUserControllers      interfaces.HttpControllers
 	LoginUserControllers         interfaces.HttpControllers
 	UserAuthenticatorMiddlewares interfaces.HttpControllers
+	CreatorProductControllers    interfaces.HttpControllers
 }
 
 func (c *Container) Dependencies() *handlers {
 	encryptor := encryptor.BcryptPasswordEncryptor{}
 	userAuthenticator := auth.JwtUserAuthenticator{}
+	idGerador := geradorid.UUID{}
 
 	creatorUser := repository.GormCreatorUser{}
-	idGerador := geradorid.UUID{}
 	registerUserUseCase := usecase.NewRegisterUserUseCase(&creatorUser, &idGerador, &encryptor)
 	registerUserControllers := controllers.NewRegisterUserControllers(registerUserUseCase)
 
@@ -43,9 +44,14 @@ func (c *Container) Dependencies() *handlers {
 
 	userAuthenticatorMiddlewares := middlewares.NewUserAuthenticatorMiddlewares(&userAuthenticator)
 
+	creatorProduct := repository.GormCreatorProduct{}
+	creatorProductUsecase := usecase.NewCreatorProductUseCase(&creatorProduct, &idGerador)
+	creatorProductControllers := controllers.NewCreatorProductControllers(creatorProductUsecase)
+
 	return &handlers{
 		RegisterUserControllers:      registerUserControllers,
 		LoginUserControllers:         loginUserControllers,
 		UserAuthenticatorMiddlewares: userAuthenticatorMiddlewares,
+		CreatorProductControllers:    creatorProductControllers,
 	}
 }

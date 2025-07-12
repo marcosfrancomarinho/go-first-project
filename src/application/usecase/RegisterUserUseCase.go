@@ -21,19 +21,19 @@ func NewRegisterUserUseCase(
 	return &RegisterUserUseCase{createUser: createUser, gerator: gerator, encryptor: encryptor}
 }
 
-func (r *RegisterUserUseCase) Register(userDTO *dto.RequestRegisterUserDTO) (*dto.ResponseRegisterUserDTO, error) {
+func (r *RegisterUserUseCase) Register(payload *dto.RequestRegisterUserDTO) (*dto.ResponseRegisterUserDTO, error) {
 
-	name, err := valuesobject.NewName(userDTO.Name)
+	name, err := valuesobject.NewName(payload.Name)
 	if err != nil {
 		return nil, err
 	}
 
-	email, err := valuesobject.NewEmail(userDTO.Email)
+	email, err := valuesobject.NewEmail(payload.Email)
 	if err != nil {
 		return nil, err
 	}
 
-	password, err := valuesobject.NewPassword(userDTO.Password)
+	password, err := valuesobject.NewPassword(payload.Password)
 	if err != nil {
 		return nil, err
 	}

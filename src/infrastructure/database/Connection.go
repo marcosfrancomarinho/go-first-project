@@ -18,6 +18,13 @@ type User struct {
 	Password string
 }
 
+type Product struct {
+	Id       string `gorm:"primaryKey"`
+	Name     string
+	Price    float32
+	Quantity int
+}
+
 func (d *Database) Connection() {
 	if d.DB != nil {
 		return
@@ -30,9 +37,9 @@ func (d *Database) Connection() {
 		log.Fatal("Erro ao conectar com o banco:", err)
 	}
 
-	if err = db.AutoMigrate(&User{}); err != nil {
+	if err = db.AutoMigrate(&User{}, &Product{}); err != nil {
 		log.Fatal("Erro ao migrar", err)
 	}
-	
+
 	d.DB = db
 }

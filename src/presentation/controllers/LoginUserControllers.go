@@ -20,7 +20,7 @@ func NewLoginUserControllers(loginUserUseCase *usecase.LoginUserUseCase) *LoginU
 }
 
 func (l *LoginUserControllers) Execute(httpContext interfaces.HttpContext) {
-	var raw RawLogin
+	var raw  RawLogin
 	if err := httpContext.GetBody(&raw); err != nil {
 		httpContext.SendError(err)
 		return

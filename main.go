@@ -6,6 +6,8 @@ import (
 	"github.com/marcosfrancomarinho/go-first-project/src/shared/container"
 )
 
+
+
 func main() {
 	server := http.NewGinHttpServer()
 	container := container.GetInstance()

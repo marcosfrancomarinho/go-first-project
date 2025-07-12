@@ -21,13 +21,13 @@ func NewLoginUserUseCase(
 	return &LoginUserUseCase{encryptor: encryptor, userAuthenticator: userAuthenticator, findorUser: findorUser}
 }
 
-func (l *LoginUserUseCase) Login(userDTO *dto.RequestLoginUserDTO) (*dto.ResponseLoginUserDTO, error) {
-	email, err := valuesobject.NewEmail(userDTO.Email)
+func (l *LoginUserUseCase) Login(payload *dto.RequestLoginUserDTO) (*dto.ResponseLoginUserDTO, error) {
+	email, err := valuesobject.NewEmail(payload.Email)
 	if err != nil {
 		return nil, err
 	}
 
-	password, err := valuesobject.NewPassword(userDTO.Password)
+	password, err := valuesobject.NewPassword(payload.Password)
 	if err != nil {
 		return nil, err
 	}
