@@ -12,6 +12,7 @@ type GinHttpServer struct {
 }
 
 func NewGinHttpServer() *GinHttpServer {
+	gin.SetMode(gin.ReleaseMode)
 	return &GinHttpServer{
 		engine: gin.Default(),
 	}
@@ -32,6 +33,6 @@ func (g *GinHttpServer) On(method string, path string, controllers interfaces.Ht
 	})
 }
 
-func (g *GinHttpServer) Run(port int) {
-	g.engine.Run(fmt.Sprintf(":%d", port))
+func (g *GinHttpServer) Run(port int) error {
+	return g.engine.Run(fmt.Sprintf(":%d", port))
 }
