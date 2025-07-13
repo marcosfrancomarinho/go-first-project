@@ -13,17 +13,17 @@ POST  http://localhost:8080/login
 Content-Type: application/json 
 
 {
-    "Email":"marcosfrancomarinho@gmail.com",
+    "Email":"marcosfrancomarinho123@4gmail.com",
     "Password":"@1S23478885"
 }
 
 ###
 POST  http://localhost:8080/product
 Content-Type: application/json
-Token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMTIyNWIyMy1iMDI0LTQ1YTctODkwMi0xYmNhYWMyNjk3YTIiLCJleHAiOjE3NTIzNDM1Njl9.JCRJeP5k-POQmluaKzuM9oIH1UX-VcHd-Eabjymu1gU
+Token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwY2JlMDI4ZC1jMjZkLTRmZDUtYTk4Zi00ODgxMTVmMTJiMzEiLCJleHAiOjE3NTIzODA0NzB9.2p6_uKhbnTgkdwbhVLLED79wc_iQo8708Xno7IfMu6o
 
 {
-    "Name":"geladeira",
-    "Price":500,
-    "Quantity":5
+    "Name":"celular",
+    "Price":2555.99,
+    "Quantity":2
 }

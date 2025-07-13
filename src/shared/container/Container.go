@@ -27,6 +27,7 @@ type handlers struct {
 	LoginUserControllers         interfaces.HttpControllers
 	UserAuthenticatorMiddlewares interfaces.HttpControllers
 	CreatorProductControllers    interfaces.HttpControllers
+	FinderProductControllers     interfaces.HttpControllers
 }
 
 func (c *Container) Dependencies() *handlers {
@@ -48,10 +49,15 @@ func (c *Container) Dependencies() *handlers {
 	creatorProductUsecase := usecase.NewCreatorProductUseCase(&creatorProduct, &idGerador)
 	creatorProductControllers := controllers.NewCreatorProductControllers(creatorProductUsecase)
 
+	finderProduct := repository.GormFinderProduct{}
+	finderProductUseCase := usecase.NewFinderProductUseCase(&finderProduct)
+	finderProductControllers := controllers.NewFinderProductControllers(finderProductUseCase)
+
 	return &handlers{
 		RegisterUserControllers:      registerUserControllers,
 		LoginUserControllers:         loginUserControllers,
 		UserAuthenticatorMiddlewares: userAuthenticatorMiddlewares,
 		CreatorProductControllers:    creatorProductControllers,
+		FinderProductControllers:     finderProductControllers,
 	}
 }

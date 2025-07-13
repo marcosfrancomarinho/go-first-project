@@ -12,9 +12,11 @@ type GormFindorUser struct {
 }
 
 func (g *GormFindorUser) FindByEmail(user *entities.UserLogin) (*entities.UserRegister, error) {
-	var client database.Database
-	var User database.User
-	var userLoginMappers mappers.UserLoginMappers
+	var (
+		client           database.Database
+		User             database.User
+		userLoginMappers mappers.UserLoginMappers
+	)
 
 	client.Connection()
 

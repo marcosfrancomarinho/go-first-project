@@ -31,3 +31,7 @@ func (p *Product) GetPrice() float32 {
 func (p *Product) GetQuantity() int {
 	return p.Quantity.GetValue()
 }
+
+func (p *Product) GetTotal() float32 {
+	return p.GetPrice() * float32(p.GetQuantity())
+}

@@ -10,7 +10,9 @@ type GormCreatorProduct struct {
 
 func (g *GormCreatorProduct) Create(product *entities.Product) error {
 	var client database.Database
+	
 	client.Connection()
+
 	datas := database.Product{
 		Id:       product.GetID(),
 		Name:     product.GetName(),
