@@ -1,0 +1,29 @@
+###
+POST  http://localhost:8080/register
+Content-Type: application/json
+
+{
+    "Name":"marcos",
+    "Email":"marcosfrancomarinho123@4gmail.com",
+    "Password":"@1S23478885"
+}
+
+###
+POST  http://localhost:8080/login
+Content-Type: application/json 
+
+{
+    "Email":"marcosfrancomarinho123@4gmail.com",
+    "Password":"@1S23478885"
+}
+
+###
+POST http://localhost:8080/product
+Content-Type: application/json
+Token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwY2JlMDI4ZC1jMjZkLTRmZDUtYTk4Zi00ODgxMTVmMTJiMzEiLCJleHAiOjE3NTI0NDczODV9.WHZlEL9pAlAM3muphJJmjRasnb-zsjs9Z3bw6O49sD8
+
+{
+    "Name":"ar condicionado",
+    "Price":2555.99,
+    "Quantity":2
+}
