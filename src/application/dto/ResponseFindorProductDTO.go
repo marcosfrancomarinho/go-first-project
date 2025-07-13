@@ -1,6 +1,6 @@
 package dto
 
-type ResponseFinderProductDTO struct {
+type ResponseFindorProductDTO struct {
 	Id       string  `json:"id"`
 	Name     string  `json:"name"`
 	Price    float32 `json:"price"`

@@ -5,16 +5,16 @@ import (
 	"github.com/marcosfrancomarinho/go-first-project/src/domain/interfaces"
 )
 
-type FinderProductControllers struct {
-	finderProductUseCase *usecase.FinderProductUseCase
+type FindorProductControllers struct {
+	FindorProductUseCase *usecase.FindorProductUseCase
 }
 
-func NewFinderProductControllers(finderProductUseCase *usecase.FinderProductUseCase) *FinderProductControllers {
-	return &FinderProductControllers{finderProductUseCase: finderProductUseCase}
+func NewFindorProductControllers(FindorProductUseCase *usecase.FindorProductUseCase) *FindorProductControllers {
+	return &FindorProductControllers{FindorProductUseCase: FindorProductUseCase}
 }
 
-func (f *FinderProductControllers) Execute(httpContext interfaces.HttpContext) {
-	output, err := f.finderProductUseCase.FindAll()
+func (f *FindorProductControllers) Execute(httpContext interfaces.HttpContext) {
+	output, err := f.FindorProductUseCase.FindAll()
 	if err != nil {
 		httpContext.SendError(err)
 		return

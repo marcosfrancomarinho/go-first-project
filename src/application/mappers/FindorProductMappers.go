@@ -6,10 +6,10 @@ import (
 	"github.com/marcosfrancomarinho/go-first-project/src/infrastructure/database"
 )
 
-type FinderProductMappers struct {
+type FindorProductMappers struct {
 }
 
-func (f *FinderProductMappers) GetAllProducts(products *[]database.Product) (*[]entities.Product, error) {
+func (f *FindorProductMappers) GetAllProducts(products *[]database.Product) (*[]entities.Product, error) {
 	var listProducts []entities.Product
 
 	for _, value := range *products {

@@ -5,23 +5,23 @@ import (
 	"github.com/marcosfrancomarinho/go-first-project/src/domain/interfaces"
 )
 
-type FinderProductUseCase struct {
-	finderProduct interfaces.FinderProduct
+type FindorProductUseCase struct {
+	FindorProduct interfaces.FindorProduct
 }
 
-func NewFinderProductUseCase(finderProduct interfaces.FinderProduct) *FinderProductUseCase {
-	return &FinderProductUseCase{finderProduct: finderProduct}
+func NewFindorProductUseCase(FindorProduct interfaces.FindorProduct) *FindorProductUseCase {
+	return &FindorProductUseCase{FindorProduct: FindorProduct}
 }
 
-func (f *FinderProductUseCase) FindAll() (*[]dto.ResponseFinderProductDTO, error) {
-	var listProducts []dto.ResponseFinderProductDTO
-	products, err := f.finderProduct.FindAll()
+func (f *FindorProductUseCase) FindAll() (*[]dto.ResponseFindorProductDTO, error) {
+	var listProducts []dto.ResponseFindorProductDTO
+	products, err := f.FindorProduct.FindAll()
 	if err != nil {
 		return nil, err
 	}
 	for _, value := range *products {
 		listProducts = append(listProducts,
-			dto.ResponseFinderProductDTO{
+			dto.ResponseFindorProductDTO{
 				Id:       value.GetID(),
 				Name:     value.GetName(),
 				Price:    value.GetPrice(),

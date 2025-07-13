@@ -2,18 +2,19 @@ package repository
 
 import (
 	"errors"
+
 	"github.com/marcosfrancomarinho/go-first-project/src/application/mappers"
 	"github.com/marcosfrancomarinho/go-first-project/src/domain/entities"
 	"github.com/marcosfrancomarinho/go-first-project/src/infrastructure/database"
 )
 
-type GormFinderProduct struct{}
+type GormFindorProduct struct{}
 
-func (f *GormFinderProduct) FindAll() (*[]entities.Product, error) {
+func (f *GormFindorProduct) FindAll() (*[]entities.Product, error) {
 	var (
 		client               database.Database
 		products             []database.Product
-		finderProductMappers mappers.FinderProductMappers
+		FindorProductMappers mappers.FindorProductMappers
 	)
 	client.Connection()
 
@@ -25,7 +26,7 @@ func (f *GormFinderProduct) FindAll() (*[]entities.Product, error) {
 	if result.RowsAffected == 0 {
 		return nil, errors.New("nenhum  produto encontrado")
 	}
-	listProducts, err := finderProductMappers.GetAllProducts(&products)
+	listProducts, err := FindorProductMappers.GetAllProducts(&products)
 	if err != nil {
 		return nil, err
 	}
