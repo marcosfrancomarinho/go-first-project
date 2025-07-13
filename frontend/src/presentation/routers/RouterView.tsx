@@ -14,12 +14,12 @@ export const RouterView: React.FC = () => {
     <>
       <Routes>
         <Route path='/' element={<PublicLayout />}>
-          <Route path='home' element={<Home />} />
+          <Route path='' element={<Home />} />
           <Route path='login' element={<Login />} />
           <Route path='sign' element={<Sign />} />
         </Route>
         <Route path='/auth' element={<PrivateLayout />}>
-          <Route path='welcome' element={<Welcome />} />
+          <Route path='' element={<Welcome />} />
           <Route path='create-product' element={<CreateProduct />} />
           <Route path='find-product' element={<FindorProduct />} />
         </Route>

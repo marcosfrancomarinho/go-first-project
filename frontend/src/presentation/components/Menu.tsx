@@ -7,7 +7,7 @@ export const Menu: React.FC<{ authenticated: boolean }> = ({ authenticated }) =>
 
   return authenticated ? (
     <nav className='space-x-4'>
-      <Link to='/home' className='hover:underline'>
+      <Link to='/' className='hover:underline'>
         Home
       </Link>
       <Link to='/login' className='hover:underline'>

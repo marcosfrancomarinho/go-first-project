@@ -20,7 +20,7 @@ export const Login: React.FC = () => {
       setError(null);
       const { name } = await loginUserUseCase.login({ email, password });
       setName(name);
-      navigate('/auth/welcome');
+      navigate('/auth');
     } catch (error) {
       setError(error as Error);
     } finally {
