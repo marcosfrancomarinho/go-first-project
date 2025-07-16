@@ -9,6 +9,10 @@ import (
 type FindorProductMappers struct {
 }
 
+func NewFindorProductMappers() *FindorProductMappers {
+	return &FindorProductMappers{}
+}
+
 func (f *FindorProductMappers) GetAllProducts(products *[]database.Product) (*[]entities.Product, error) {
 	var listProducts []entities.Product
 

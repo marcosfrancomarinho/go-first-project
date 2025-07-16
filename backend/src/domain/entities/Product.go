@@ -3,33 +3,33 @@ package entities
 import "github.com/marcosfrancomarinho/go-first-project/src/domain/valuesobject"
 
 type Product struct {
-	Id       *valuesobject.ID
-	Name     *valuesobject.Name
-	Price    *valuesobject.Price
-	Quantity *valuesobject.Quantity
+	id       *valuesobject.ID
+	name     *valuesobject.Name
+	price    *valuesobject.Price
+	quantity *valuesobject.Quantity
 }
 
 func NewProduct(
-	Id *valuesobject.ID,
-	Name *valuesobject.Name,
-	Price *valuesobject.Price,
-	Quantity *valuesobject.Quantity,
+	id *valuesobject.ID,
+	name *valuesobject.Name,
+	price *valuesobject.Price,
+	quantity *valuesobject.Quantity,
 ) *Product {
-	return &Product{Id: Id, Name: Name, Price: Price, Quantity: Quantity}
+	return &Product{id, name, price, quantity}
 }
 
 func (p *Product) GetName() string {
-	return p.Name.GetValue()
+	return p.name.GetValue()
 }
 func (p *Product) GetID() string {
-	return p.Id.GetValue()
+	return p.id.GetValue()
 }
 
 func (p *Product) GetPrice() float32 {
-	return p.Price.GetValue()
+	return p.price.GetValue()
 }
 func (p *Product) GetQuantity() int {
-	return p.Quantity.GetValue()
+	return p.quantity.GetValue()
 }
 
 func (p *Product) GetTotal() float32 {

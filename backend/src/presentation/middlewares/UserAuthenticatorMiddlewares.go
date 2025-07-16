@@ -10,7 +10,7 @@ type UserAuthenticatorMiddlewares struct {
 }
 
 func NewUserAuthenticatorMiddlewares(userAuthenticator interfaces.UserAuthenticator) interfaces.HttpControllers {
-	return &UserAuthenticatorMiddlewares{userAuthenticator: userAuthenticator}
+	return &UserAuthenticatorMiddlewares{userAuthenticator}
 }
 
 func (u *UserAuthenticatorMiddlewares) Execute(httpContext interfaces.HttpContext) {

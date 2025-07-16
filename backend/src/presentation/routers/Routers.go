@@ -10,7 +10,7 @@ type Routers struct {
 }
 
 func NewRouters(server interfaces.HttpServer) *Routers {
-	return &Routers{server: server}
+	return &Routers{server}
 }
 
 func (r *Routers) Register(container *container.Container) {

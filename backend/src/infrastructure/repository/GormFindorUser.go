@@ -2,7 +2,6 @@ package repository
 
 import (
 	"errors"
-
 	"github.com/marcosfrancomarinho/go-first-project/src/application/mappers"
 	"github.com/marcosfrancomarinho/go-first-project/src/domain/entities"
 	"github.com/marcosfrancomarinho/go-first-project/src/domain/interfaces"
@@ -17,16 +16,12 @@ func NewGormFindorUser() interfaces.FindorUser {
 	return &GormFindorUser{}
 }
 
-func (g *GormFindorUser) FindByEmail(user *entities.UserLogin) (*entities.UserRegister, error) {
-	var (
-		client           database.Database
-		User             database.User
-		userLoginMappers mappers.UserLoginMappers
-	)
+func (g *GormFindorUser) FindByEmail(userLogin *entities.UserLogin) (*entities.UserRegister, error) {
+	user := &database.User{}
+	userLoginMappers := mappers.NewUserLoginMappers()
 
-	client.Connection()
-
-	result := client.DB.Where("Email = ?", user.GetEmail()).First(&User)
+	client := database.NewDataBase()
+	result := client.Where("Email = ?", userLogin.GetEmail()).First(user)
 
 	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 		return nil, errors.New("usuario não foi encontrado")
@@ -35,7 +30,7 @@ func (g *GormFindorUser) FindByEmail(user *entities.UserLogin) (*entities.UserRe
 		return nil, result.Error
 	}
 
-	userFound, err := userLoginMappers.GetUser(&User)
+	userFound, err := userLoginMappers.GetUser(user)
 	if err != nil {
 		return nil, err
 	}

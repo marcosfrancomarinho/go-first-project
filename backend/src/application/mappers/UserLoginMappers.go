@@ -9,6 +9,10 @@ import (
 type UserLoginMappers struct {
 }
 
+func NewUserLoginMappers() *UserLoginMappers {
+	return &UserLoginMappers{}
+}
+
 func (u *UserLoginMappers) GetUser(user *database.User) (*entities.UserRegister, error) {
 	name, err := valuesobject.NewName(user.Name)
 	if err != nil {
@@ -29,7 +33,7 @@ func (u *UserLoginMappers) GetUser(user *database.User) (*entities.UserRegister,
 	if err != nil {
 		return nil, err
 	}
-	
+
 	userFound := entities.NewUserRegister(name, email, password, id)
 
 	return userFound, nil

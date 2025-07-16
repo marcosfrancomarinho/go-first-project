@@ -13,21 +13,15 @@ func NewGormCreatorProduct() interfaces.CreatorProduct {
 	return &GormCreatorProduct{}
 }
 
-
-
-
 func (g *GormCreatorProduct) Create(product *entities.Product) error {
-	var client database.Database
-
-	client.Connection()
-
+	client := database.NewDataBase()
 	datas := database.Product{
 		Id:       product.GetID(),
 		Name:     product.GetName(),
 		Price:    product.GetPrice(),
 		Quantity: product.GetQuantity(),
 	}
-	if result := client.DB.Create(&datas); result.Error != nil {
+	if result := client.Create(&datas); result.Error != nil {
 		return result.Error
 	}
 	return nil

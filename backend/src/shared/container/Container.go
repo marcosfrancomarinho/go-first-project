@@ -1,6 +1,7 @@
 package container
 
 import (
+	"sync"
 	"github.com/marcosfrancomarinho/go-first-project/src/application/usecase"
 	"github.com/marcosfrancomarinho/go-first-project/src/domain/interfaces"
 	"github.com/marcosfrancomarinho/go-first-project/src/infrastructure/auth"
@@ -13,12 +14,15 @@ import (
 
 type Container struct{}
 
-var instance *Container
+var (
+	instance *Container
+	once     sync.Once
+)
 
 func GetInstance() *Container {
-	if instance == nil {
+	once.Do(func() {
 		instance = &Container{}
-	}
+	})
 	return instance
 }
 

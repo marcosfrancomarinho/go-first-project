@@ -16,14 +16,12 @@ func NewGormFindorProduct() interfaces.FindorProduct {
 }
 
 func (f *GormFindorProduct) FindAll() (*[]entities.Product, error) {
-	var (
-		client               database.Database
-		products             []database.Product
-		FindorProductMappers mappers.FindorProductMappers
-	)
-	client.Connection()
+	client := database.NewDataBase()
+	products := &[]database.Product{}
 
-	result := client.DB.Find(&products)
+	findorProductMappers := mappers.NewFindorProductMappers()
+
+	result := client.Find(&products)
 	if result.Error != nil {
 		return nil, result.Error
 	}
@@ -31,7 +29,7 @@ func (f *GormFindorProduct) FindAll() (*[]entities.Product, error) {
 	if result.RowsAffected == 0 {
 		return nil, errors.New("nenhum  produto encontrado")
 	}
-	listProducts, err := FindorProductMappers.GetAllProducts(&products)
+	listProducts, err := findorProductMappers.GetAllProducts(products)
 	if err != nil {
 		return nil, err
 	}

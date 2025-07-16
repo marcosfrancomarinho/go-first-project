@@ -15,7 +15,7 @@ func NewUserRegister(
 	password *valuesobject.Password,
 	id *valuesobject.ID,
 ) *UserRegister {
-	return &UserRegister{name: name, email: email, password: password, id: id}
+	return &UserRegister{name, email, password, id}
 }
 
 func (u *UserRegister) GetName() string {

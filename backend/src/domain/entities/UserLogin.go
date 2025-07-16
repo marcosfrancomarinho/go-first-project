@@ -8,7 +8,7 @@ type UserLogin struct {
 }
 
 func NewUserLogin(email *valuesobject.Email, password *valuesobject.Password) *UserLogin {
-	return &UserLogin{email: email, password: password}
+	return &UserLogin{email, password}
 }
 
 func (u *UserLogin) GetEmail() string {

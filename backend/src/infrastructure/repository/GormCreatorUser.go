@@ -13,9 +13,7 @@ func NewGormCreatorUser() interfaces.CreateUser {
 }
 
 func (g *GormCreatorUser) Create(user *entities.UserRegister) error {
-	var client database.Database
-
-	client.Connection()
+	client := database.NewDataBase()
 
 	datas := database.User{
 		Id:       user.GetID(),
@@ -24,7 +22,7 @@ func (g *GormCreatorUser) Create(user *entities.UserRegister) error {
 		Password: user.GetPassword(),
 	}
 
-	if result := client.DB.Create(&datas); result.Error != nil {
+	if result := client.Create(&datas); result.Error != nil {
 		return result.Error
 	}
 	return nil
