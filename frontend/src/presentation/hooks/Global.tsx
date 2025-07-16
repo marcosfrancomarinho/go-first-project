@@ -12,8 +12,8 @@ interface Dependencies {
 }
 
 export interface AppConfig extends Dependencies {
-  name: string;
-  setName: (name: string) => void;
+  user: { name: string; token: string } | null;
+  setUser: (datas: { name: string; token: string }) => void;
 }
 
 export const AppContext = React.createContext<AppConfig | null>(null);
@@ -22,6 +22,6 @@ export const AppProvider: React.FC<{
   children: ReactNode;
   dependecies: Dependencies;
 }> = ({ children, dependecies }) => {
-  const [name, setName] = React.useState<string>('');
-  return <AppContext.Provider value={{ ...dependecies, name, setName }}>{children}</AppContext.Provider>;
+  const [user, setUser] = React.useState<{ name: string; token: string } | null>(null);
+  return <AppContext.Provider value={{ ...dependecies, user, setUser }}>{children}</AppContext.Provider>;
 };

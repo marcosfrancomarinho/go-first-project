@@ -6,7 +6,7 @@ export class FindorProductUseCase {
   public constructor(private httpClient: HttpClient, private storageClient: StorageClient) {}
 
   public async findAll(): Promise<ResponseFindorProductDTO[]> {
-    const token: string = this.storageClient.get('token');
+    const {token} = this.storageClient.get<{token:string}>('user');
     const products = await this.httpClient.get<ResponseFindorProductDTO[]>('/product', { token });
     return products;
   }

@@ -17,7 +17,7 @@ export class LoginUserUseCase {
       'login',
       user.getCredentialsForAuthentication()
     );
-    this.storageClient.set('token', authenticationResponse.token);
+    this.storageClient.set('user', { name: authenticationResponse.name, token: authenticationResponse.token });
     return authenticationResponse;
   }
 }

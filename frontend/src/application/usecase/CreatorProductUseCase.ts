@@ -15,7 +15,7 @@ export class CreatorProductUseCase {
     const price: Price = Price.create(payload.price);
     const quantity: Quantity = Quantity.create(payload.quantity);
     const product: Product = Product.create(price, quantity, name);
-    const token: string = this.storageClient.get('token');
+    const { token } = this.storageClient.get<{ token: string }>('user');
     const registerResponse = await this.httpClient.post<ResponseCreatorProductDTO>('/product', product.getProductForRegister(), {
       token,
     });

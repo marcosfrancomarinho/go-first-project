@@ -2,7 +2,7 @@ package auth
 
 import (
 	"errors"
-	"fmt"
+	"fmt" 
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/joho/godotenv"
 	"github.com/marcosfrancomarinho/go-first-project/src/domain/entities"
@@ -10,6 +10,7 @@ import (
 	"os"
 	"time"
 )
+
 
 type JwtUserAuthenticator struct{}
 
