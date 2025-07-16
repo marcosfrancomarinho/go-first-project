@@ -10,8 +10,8 @@ type CreatorProductControllers struct {
 	creatorProductUseCase *usecase.CreatorProductUseCase
 }
 
-func NewCreatorProductControllers(creatorProductUseCase *usecase.CreatorProductUseCase) *CreatorProductControllers {
-	return &CreatorProductControllers{creatorProductUseCase: creatorProductUseCase}
+func NewCreatorProductControllers(creatorProductUseCase *usecase.CreatorProductUseCase) interfaces.HttpControllers {
+	return &CreatorProductControllers{creatorProductUseCase}
 }
 
 type RawCreatorProduct struct {

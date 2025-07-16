@@ -2,10 +2,15 @@ package repository
 
 import (
 	"github.com/marcosfrancomarinho/go-first-project/src/domain/entities"
+	"github.com/marcosfrancomarinho/go-first-project/src/domain/interfaces"
 	"github.com/marcosfrancomarinho/go-first-project/src/infrastructure/database"
 )
 
 type GormCreatorUser struct{}
+
+func NewGormCreatorUser() interfaces.CreateUser {
+	return &GormCreatorUser{}
+}
 
 func (g *GormCreatorUser) Create(user *entities.UserRegister) error {
 	var client database.Database

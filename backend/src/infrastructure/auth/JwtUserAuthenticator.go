@@ -2,17 +2,21 @@ package auth
 
 import (
 	"errors"
-	"fmt" 
+	"fmt"
+	"os"
+	"time"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/joho/godotenv"
 	"github.com/marcosfrancomarinho/go-first-project/src/domain/entities"
+	"github.com/marcosfrancomarinho/go-first-project/src/domain/interfaces"
 	"github.com/marcosfrancomarinho/go-first-project/src/domain/valuesobject"
-	"os"
-	"time"
 )
 
-
 type JwtUserAuthenticator struct{}
+
+func NewJwtUserAuthenticator() interfaces.UserAuthenticator {
+	return &JwtUserAuthenticator{}
+}
 
 type claims struct {
 	IdUser string `json:"userId"`
@@ -25,7 +29,7 @@ func getKeyEnv(key string) ([]byte, error) {
 	}
 
 	keySecret := os.Getenv(key)
-	
+
 	if keySecret == "" {
 		return nil, fmt.Errorf("variável de ambiente %s não definida", key)
 	}

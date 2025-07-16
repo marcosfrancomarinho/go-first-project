@@ -5,10 +5,15 @@ import (
 
 	"github.com/marcosfrancomarinho/go-first-project/src/application/mappers"
 	"github.com/marcosfrancomarinho/go-first-project/src/domain/entities"
+	"github.com/marcosfrancomarinho/go-first-project/src/domain/interfaces"
 	"github.com/marcosfrancomarinho/go-first-project/src/infrastructure/database"
 )
 
 type GormFindorProduct struct{}
+
+func NewGormFindorProduct() interfaces.FindorProduct {
+	return &GormFindorProduct{}
+}
 
 func (f *GormFindorProduct) FindAll() (*[]entities.Product, error) {
 	var (

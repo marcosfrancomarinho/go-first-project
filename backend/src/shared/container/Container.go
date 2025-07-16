@@ -22,7 +22,7 @@ func GetInstance() *Container {
 	return instance
 }
 
-type handlers struct {
+type Handlers struct {
 	RegisterUserControllers      interfaces.HttpControllers
 	LoginUserControllers         interfaces.HttpControllers
 	UserAuthenticatorMiddlewares interfaces.HttpControllers
@@ -30,34 +30,34 @@ type handlers struct {
 	FindorProductControllers     interfaces.HttpControllers
 }
 
-func (c *Container) Dependencies() *handlers {
-	encryptor := encryptor.BcryptPasswordEncryptor{}
-	userAuthenticator := auth.JwtUserAuthenticator{}
-	idGerador := geradorid.UUID{}
+func (c *Container) Dependencies() *Handlers {
+	encryptor := encryptor.NewBcryptPasswordEncryptor()
+	userAuthenticator := auth.NewJwtUserAuthenticator()
+	idGerador := geradorid.NewUUID()
 
-	creatorUser := repository.GormCreatorUser{}
-	registerUserUseCase := usecase.NewRegisterUserUseCase(&creatorUser, &idGerador, &encryptor)
+	creatorUser := repository.NewGormCreatorUser()
+	registerUserUseCase := usecase.NewRegisterUserUseCase(creatorUser, idGerador, encryptor)
 	registerUserControllers := controllers.NewRegisterUserControllers(registerUserUseCase)
 
-	findorUser := repository.GormFindorUser{}
-	loginUserUseCase := usecase.NewLoginUserUseCase(&encryptor, &userAuthenticator, &findorUser)
+	findorUser := repository.NewGormFindorUser()
+	loginUserUseCase := usecase.NewLoginUserUseCase(encryptor, userAuthenticator, findorUser)
 	loginUserControllers := controllers.NewLoginUserControllers(loginUserUseCase)
 
-	userAuthenticatorMiddlewares := middlewares.NewUserAuthenticatorMiddlewares(&userAuthenticator)
+	userAuthenticatorMiddlewares := middlewares.NewUserAuthenticatorMiddlewares(userAuthenticator)
 
-	creatorProduct := repository.GormCreatorProduct{}
-	creatorProductUsecase := usecase.NewCreatorProductUseCase(&creatorProduct, &idGerador)
+	creatorProduct := repository.NewGormCreatorProduct()
+	creatorProductUsecase := usecase.NewCreatorProductUseCase(creatorProduct, idGerador)
 	creatorProductControllers := controllers.NewCreatorProductControllers(creatorProductUsecase)
 
-	FindorProduct := repository.GormFindorProduct{}
-	FindorProductUseCase := usecase.NewFindorProductUseCase(&FindorProduct)
+	FindorProduct := repository.NewGormFindorProduct()
+	FindorProductUseCase := usecase.NewFindorProductUseCase(FindorProduct)
 	FindorProductControllers := controllers.NewFindorProductControllers(FindorProductUseCase)
 
-	return &handlers{
-		RegisterUserControllers:      registerUserControllers,
-		LoginUserControllers:         loginUserControllers,
-		UserAuthenticatorMiddlewares: userAuthenticatorMiddlewares,
-		CreatorProductControllers:    creatorProductControllers,
-		FindorProductControllers:     FindorProductControllers,
+	return &Handlers{
+		registerUserControllers,
+		loginUserControllers,
+		userAuthenticatorMiddlewares,
+		creatorProductControllers,
+		FindorProductControllers,
 	}
 }

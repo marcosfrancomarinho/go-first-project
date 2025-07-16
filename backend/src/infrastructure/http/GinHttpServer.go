@@ -11,7 +11,7 @@ type GinHttpServer struct {
 	engine *gin.Engine
 }
 
-func NewGinHttpServer() *GinHttpServer {
+func NewGinHttpServer() interfaces.HttpServer {
 	gin.SetMode(gin.ReleaseMode)
 	return &GinHttpServer{
 		engine: gin.Default(),

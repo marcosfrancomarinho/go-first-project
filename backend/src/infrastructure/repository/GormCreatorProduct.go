@@ -2,15 +2,23 @@ package repository
 
 import (
 	"github.com/marcosfrancomarinho/go-first-project/src/domain/entities"
+	"github.com/marcosfrancomarinho/go-first-project/src/domain/interfaces"
 	"github.com/marcosfrancomarinho/go-first-project/src/infrastructure/database"
 )
 
 type GormCreatorProduct struct {
 }
 
+func NewGormCreatorProduct() interfaces.CreatorProduct {
+	return &GormCreatorProduct{}
+}
+
+
+
+
 func (g *GormCreatorProduct) Create(product *entities.Product) error {
 	var client database.Database
-	
+
 	client.Connection()
 
 	datas := database.Product{

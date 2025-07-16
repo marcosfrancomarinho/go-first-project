@@ -6,15 +6,15 @@ import (
 )
 
 type FindorProductControllers struct {
-	FindorProductUseCase *usecase.FindorProductUseCase
+	findorProductUseCase *usecase.FindorProductUseCase
 }
 
-func NewFindorProductControllers(FindorProductUseCase *usecase.FindorProductUseCase) *FindorProductControllers {
-	return &FindorProductControllers{FindorProductUseCase: FindorProductUseCase}
+func NewFindorProductControllers(findorProductUseCase *usecase.FindorProductUseCase) interfaces.HttpControllers {
+	return &FindorProductControllers{findorProductUseCase}
 }
 
 func (f *FindorProductControllers) Execute(httpContext interfaces.HttpContext) {
-	output, err := f.FindorProductUseCase.FindAll()
+	output, err := f.findorProductUseCase.FindAll()
 	if err != nil {
 		httpContext.SendError(err)
 		return

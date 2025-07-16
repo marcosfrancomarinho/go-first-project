@@ -2,13 +2,19 @@ package repository
 
 import (
 	"errors"
+
 	"github.com/marcosfrancomarinho/go-first-project/src/application/mappers"
 	"github.com/marcosfrancomarinho/go-first-project/src/domain/entities"
+	"github.com/marcosfrancomarinho/go-first-project/src/domain/interfaces"
 	"github.com/marcosfrancomarinho/go-first-project/src/infrastructure/database"
 	"gorm.io/gorm"
 )
 
 type GormFindorUser struct {
+}
+
+func NewGormFindorUser() interfaces.FindorUser {
+	return &GormFindorUser{}
 }
 
 func (g *GormFindorUser) FindByEmail(user *entities.UserLogin) (*entities.UserRegister, error) {

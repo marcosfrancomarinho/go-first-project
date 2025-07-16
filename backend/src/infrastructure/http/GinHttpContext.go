@@ -2,15 +2,17 @@ package http
 
 import (
 	"errors"
+
 	"github.com/gin-gonic/gin"
+	"github.com/marcosfrancomarinho/go-first-project/src/domain/interfaces"
 )
 
 type GinHttpContext struct {
 	ctx *gin.Context
 }
 
-func NewGinHttpContext(ctx *gin.Context) *GinHttpContext {
-	return &GinHttpContext{ctx: ctx}
+func NewGinHttpContext(ctx *gin.Context) interfaces.HttpContext {
+	return &GinHttpContext{ctx}
 }
 
 func (g *GinHttpContext) GetBody(input any) error {

@@ -10,8 +10,8 @@ type RegisterUserControllers struct {
 	registerUserUseCase *usecase.RegisterUserUseCase
 }
 
-func NewRegisterUserControllers(registerUserUseCase *usecase.RegisterUserUseCase) *RegisterUserControllers {
-	return &RegisterUserControllers{registerUserUseCase: registerUserUseCase}
+func NewRegisterUserControllers(registerUserUseCase *usecase.RegisterUserUseCase) interfaces.HttpControllers {
+	return &RegisterUserControllers{registerUserUseCase}
 }
 
 type RawRegister struct {

@@ -15,8 +15,8 @@ type RawLogin struct {
 	Password string
 }
 
-func NewLoginUserControllers(loginUserUseCase *usecase.LoginUserUseCase) *LoginUserControllers {
-	return &LoginUserControllers{loginUserUseCase: loginUserUseCase}
+func NewLoginUserControllers(loginUserUseCase *usecase.LoginUserUseCase) interfaces.HttpControllers {
+	return &LoginUserControllers{loginUserUseCase}
 }
 
 func (l *LoginUserControllers) Execute(httpContext interfaces.HttpContext) {

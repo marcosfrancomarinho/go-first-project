@@ -9,7 +9,7 @@ type UserAuthenticatorMiddlewares struct {
 	userAuthenticator interfaces.UserAuthenticator
 }
 
-func NewUserAuthenticatorMiddlewares(userAuthenticator interfaces.UserAuthenticator) *UserAuthenticatorMiddlewares {
+func NewUserAuthenticatorMiddlewares(userAuthenticator interfaces.UserAuthenticator) interfaces.HttpControllers {
 	return &UserAuthenticatorMiddlewares{userAuthenticator: userAuthenticator}
 }
 
