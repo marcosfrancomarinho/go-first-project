@@ -28,7 +28,7 @@ export const Menu: React.FC<{ authenticated: boolean }> = ({ authenticated }) =>
       <div className='flex items-center gap-2 text-white'>
         <FiUser />
         <span>
-          Bem-vindo <span className='lowercase'>{user?.name}</span>
+          Bem-vindo <span className='lowercase'>{JSON.parse(localStorage.getItem('user')).name}</span>
         </span>
       </div>
     </nav>
