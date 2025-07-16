@@ -1,36 +1,37 @@
 import React from 'react';
-import { FiUser } from 'react-icons/fi';
-import { Link } from 'react-router';
+import { FaUser } from 'react-icons/fa';
 import { AppContext } from '../hooks/Global';
-export const Menu: React.FC<{ authenticated: boolean }> = ({ authenticated }) => {
-  const { user } = React.useContext(AppContext)!;
+import { NavItem } from './NavItem';
 
-  return authenticated ? (
-    <nav className='space-x-4'>
-      <Link to='/' className='hover:underline'>
-        Home
-      </Link>
-      <Link to='/login' className='hover:underline'>
-        Login
-      </Link>
-      <Link to='/sign' className='hover:underline'>
-        Cadastrar
-      </Link>
-    </nav>
-  ) : (
-    <nav className='space-x-4 flex items-center'>
-      <Link to='/auth/create-product' className='hover:underline'>
-        Cadastrar Produtos
-      </Link>
-      <Link to='/auth/find-product' className='hover:underline'>
-        Buscar Produtos
-      </Link>
-      <div className='flex items-center gap-2 text-white'>
-        <FiUser />
-        <span>
-          Bem-vindo <span className='lowercase'>{JSON.parse(localStorage.getItem('user')).name}</span>
-        </span>
-      </div>
+export const Menu: React.FC = () => {
+  const { authUserUseCase } = React.useContext(AppContext)!;
+  const isAuthenticated = authUserUseCase.isAuthenticate();
+
+  return (
+    <nav className='flex items-center gap-6 text-sm' aria-label='Menu de navegação'>
+      {isAuthenticated ? (
+        <>
+          <div className='flex gap-4'>
+            <NavItem to='/auth' label='Home' />
+            <NavItem to='/auth/create-product' label='Cadastrar Produtos' />
+            <NavItem to='/auth/find-product' label='Buscar Produtos' />
+          </div>
+          <div className='flex items-center gap-2 bg-blue-700 px-3 py-1 rounded'>
+            <FaUser />
+            <span>
+              Bem-vindo, <span className='lowercase'>{authUserUseCase.getNameUser()}</span>
+            </span>
+          </div>
+        </>
+      ) : (
+        <>
+          <NavItem to='/' label='Home' />
+          <NavItem to='/login' label='Login' />
+          <NavItem to='/sign' label='Cadastrar' />
+        </>
+      )}
     </nav>
   );
 };
+
+

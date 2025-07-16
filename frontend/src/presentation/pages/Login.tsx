@@ -6,7 +6,7 @@ import { AppContext } from '../hooks/Global';
 
 export const Login: React.FC = () => {
   const navigate = useNavigate();
-  const { loginUserUseCase, setUser } = React.useContext(AppContext)!;
+  const { loginUserUseCase } = React.useContext(AppContext)!;
   const { state } = useLocation();
   const [error, setError] = React.useState<Error | null>(null);
   const [loadding, setLoading] = React.useState<boolean>(false);
@@ -18,8 +18,7 @@ export const Login: React.FC = () => {
       e.preventDefault();
       setLoading(true);
       setError(null);
-      const { name, token } = await loginUserUseCase.login({ email, password });
-      setUser({name, token});
+      await loginUserUseCase.login({ email, password });
       navigate('/auth');
     } catch (error) {
       setError(error as Error);

@@ -1,3 +1,4 @@
+import { AuthUserUseCase } from '../../application/usecase/AuthUserUseCase';
 import { CreatorProductUseCase } from '../../application/usecase/CreatorProductUseCase';
 import { FindorProductUseCase } from '../../application/usecase/FindorProductUseCase';
 import { LoginUserUseCase } from '../../application/usecase/LoginUserUseCase';
@@ -20,11 +21,13 @@ export class Container {
     const loginUserUseCase = new LoginUserUseCase(httpClient, localStorageClient);
     const findorProductUseCase = new FindorProductUseCase(httpClient, localStorageClient);
     const creatorProductUseCase = new CreatorProductUseCase(httpClient, localStorageClient);
+    const authUserUseCase = new AuthUserUseCase(localStorageClient)
     return {
       signUserUseCase,
       loginUserUseCase,
       findorProductUseCase,
       creatorProductUseCase,
+      authUserUseCase,
     };
   }
 }

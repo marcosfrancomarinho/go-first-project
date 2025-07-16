@@ -5,11 +5,11 @@ import { Outlet } from 'react-router';
 export const PrivateLayout: React.FC = () => {
   return (
     <div className='flex flex-col min-h-screen'>
-      <Header authenticated/>
+      <Header />
       <main className='grow'>
         <Outlet />
       </main>
-      <Footer  authenticated/>
+      <Footer />
     </div>
   );
 };

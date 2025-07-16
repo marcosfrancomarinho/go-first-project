@@ -3,7 +3,6 @@ package database
 import (
 	"log"
 	"sync"
-
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"

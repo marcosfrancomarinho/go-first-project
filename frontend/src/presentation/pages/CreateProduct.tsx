@@ -15,7 +15,6 @@ export const CreateProduct: React.FC = () => {
   const handleSubmit = async (e: any): Promise<void> => {
     try {
       e.preventDefault();
-
       setLoading(true);
       setError(null);
       setSuccess('');
