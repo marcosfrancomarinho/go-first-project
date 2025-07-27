@@ -12,8 +12,10 @@ export const FindorProduct: React.FC = () => {
 
   const deleteProduct = async (id: string, index: number) => {
     const response = confirm('deseja excuir');
-    if (response) await deleterProduct({ id });
-    products?.splice(index, 1);
+    if (response) {
+      await deleterProduct({ id });
+      products?.splice(index, 1);
+    }
     if (products?.length === 0) setError(new Error('nenhum produto encontrado'));
   };
 
