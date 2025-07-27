@@ -24,14 +24,16 @@ export class Container {
   }
 
   public dependencies(): AppConfig {
-    const httpGetClient = new AxiosHttpGetClient('http://localhost:8080');
-    const httpPostClient = new AxiosHttpPostClient('http://localhost:8080');
+    const baseURL: string = 'https://tool-backend-na56.onrender.com/';
+    const key: string = 'user';
+    const httpGetClient = new AxiosHttpGetClient(baseURL);
+    const httpPostClient = new AxiosHttpPostClient(baseURL);
     const signUserUseCase = new SignUserUseCase(httpPostClient, '/register');
     const localStorageClient = new CookiesClient();
-    const loginUserUseCase = new LoginUserUseCase(httpPostClient, localStorageClient, '/login', 'user');
-    const findorProductUseCase = new FindorProductUseCase(httpGetClient, localStorageClient, '/product', 'user');
-    const creatorProductUseCase = new CreatorProductUseCase(httpPostClient, localStorageClient, '/product', 'user');
-    const authUserUseCase = new AuthUserUseCase(localStorageClient, 'user');
+    const loginUserUseCase = new LoginUserUseCase(httpPostClient, localStorageClient, '/login', key);
+    const findorProductUseCase = new FindorProductUseCase(httpGetClient, localStorageClient, '/product', key);
+    const creatorProductUseCase = new CreatorProductUseCase(httpPostClient, localStorageClient, '/product', key);
+    const authUserUseCase = new AuthUserUseCase(localStorageClient, key);
     return {
       signUserUseCase,
       loginUserUseCase,
