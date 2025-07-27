@@ -10,9 +10,5 @@
     "start:backend": "cd ./backend && air",
     "install:frontend": "cd ./frontend && yarn install",
     "install:backend": "cd ./backend && go mod tidy"
-  },
-  "dependencies": {
-    "@types/js-cookie": "^3.0.6",
-    "js-cookie": "^3.0.5"
   }
 }
