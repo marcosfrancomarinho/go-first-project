@@ -4,4 +4,5 @@ export interface ResponseFindorProductDTO {
   price: number;
   quantity: number;
   total: number;
+  
 }

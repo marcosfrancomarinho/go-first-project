@@ -6,6 +6,16 @@ import { SignUserUseCase } from '../../application/usecase/SignUserUseCase';
 import { AxiosHttpClient } from '../../infrastructure/http/AxiosHttpClient';
 import { LocalStorageClient } from '../../infrastructure/storage/LocalStorageClient';
 
+export interface AppConfig {
+  signUserUseCase: SignUserUseCase;
+  loginUserUseCase: LoginUserUseCase;
+  findorProductUseCase: FindorProductUseCase;
+  creatorProductUseCase: CreatorProductUseCase;
+  authUserUseCase: AuthUserUseCase;
+}
+
+
+
 export class Container {
   private static instance: Container;
 
@@ -14,7 +24,7 @@ export class Container {
     return this.instance;
   }
 
-  public dependencies() {
+  public dependencies():AppConfig {
     const httpClient = new AxiosHttpClient('http://localhost:8080');
     const signUserUseCase = new SignUserUseCase(httpClient);
     const localStorageClient = new LocalStorageClient();

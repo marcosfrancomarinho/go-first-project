@@ -14,7 +14,7 @@ export class SignUserUseCase {
     const password: Password = Password.create(payload.password);
     const email: Email = Email.create(payload.email);
     const user: User = User.create(email, password, name);
-    const registerResponse = await this.httpClient.post<ResponseSignUserDTO>('/register', user.getCredentialsForRegister());
+    const registerResponse = await this.httpClient.post<ResponseSignUserDTO>(payload.path, user.getCredentialsForRegister());
     return registerResponse;
   }
 }

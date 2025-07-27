@@ -1,28 +1,13 @@
 import React from 'react';
-import type { ResponseFindorProductDTO } from '../../application/dto/ResponseFindorProductDTO';
-import { AppContext } from '../hooks/Global';
 import { Fallback } from '../components/Fallback';
+import { useFindorProduct } from '../../presentation/hooks/useFindorProduct';
 
 export const FindorProduct: React.FC = () => {
-  const { findorProductUseCase } = React.useContext(AppContext)!;
-  const [products, setProducts] = React.useState<ResponseFindorProductDTO[] | null>(null);
-  const [error, setError] = React.useState<Error | null>(null);
-  const [loading, setLoading] = React.useState<boolean>(false);
+  const { error, loading, products, findorProduct } = useFindorProduct();
 
   React.useEffect(() => {
-    const request = async () => {
-      try {
-        setLoading(true);
-        const productsList = await findorProductUseCase.findAll();
-        setProducts(productsList);
-      } catch (error) {
-        setError(error as Error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    request();
-  }, []);
+    findorProduct();
+  }, [ findorProduct]);
 
   if (loading) return <Fallback loading={loading} />;
   if (error) return <Fallback error={error} />;

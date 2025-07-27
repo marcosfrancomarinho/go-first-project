@@ -4,7 +4,9 @@ import (
 	"errors"
 
 	"github.com/gin-gonic/gin"
+	"github.com/golang-jwt/jwt/v5"
 	"github.com/marcosfrancomarinho/go-first-project/src/domain/interfaces"
+	"github.com/marcosfrancomarinho/go-first-project/src/shared/exceptions"
 )
 
 type GinHttpContext struct {
@@ -27,9 +29,15 @@ func (g *GinHttpContext) Send(status int, datas any, token ...string) {
 }
 
 func (g *GinHttpContext) SendError(err error) {
+	code := "ERROR"
+	if errors.Is(err, jwt.ErrInvalidType) || errors.Is(err, jwt.ErrTokenMalformed) || errors.Is(err, exceptions.ErrTokenInvalid) {
+		code = "TOKEN_ERROR"
+	}
+
 	g.ctx.JSON(400, gin.H{
 		"error":  err.Error(),
 		"status": false,
+		"code":   code,
 	})
 }
 

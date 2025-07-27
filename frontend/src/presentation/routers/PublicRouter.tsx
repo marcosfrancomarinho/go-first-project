@@ -1,6 +1,6 @@
 import React, { type ReactNode } from 'react';
 import { Navigate } from 'react-router';
-import { AppContext } from '../hooks/Global';
+import { AppContext } from '../context/Global';
 
 export const PublicRouter: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { authUserUseCase } = React.useContext(AppContext)!;

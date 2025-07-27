@@ -1,38 +1,20 @@
 import React from 'react';
-import { AppContext } from '../hooks/Global';
-import { Spinner } from '../components/Spinner';
 import { AlertError } from '../components/AlertError';
 import { AlertSuccess } from '../components/AlertSucess';
-
-type PayloadCreatorProduct = { name: string; price: number; quantity: number };
+import { Spinner } from '../components/Spinner';
+import { useCreatorProduct, type PayloadCreatorProduct } from '../../presentation/hooks/useCreatorProduct';
 
 export const CreateProduct: React.FC = () => {
-  const [error, setError] = React.useState<Error | null>(null);
-  const [loadding, setLoading] = React.useState<boolean>(false);
-  const { creatorProductUseCase } = React.useContext(AppContext)!;
-  const [success, setSuccess] = React.useState<string>('');
+  const { error, loadding, success, createorProduct } = useCreatorProduct();
   const form = React.useRef<HTMLFormElement | null>(null);
+
   const handleSubmit = async (e: any): Promise<void> => {
-    try {
-      e.preventDefault();
-      setLoading(true);
-      setError(null);
-      setSuccess('');
-      const payload = Object.fromEntries(new FormData(e.target)) as unknown as PayloadCreatorProduct;
-      const { message } = await creatorProductUseCase.create({
-        name: payload.name,
-        price: Number(payload.price),
-        quantity: Number(payload.quantity),
-      });
-      setSuccess(message);
-      form.current?.reset();
-      const input = form.current?.elements.item(0) as HTMLInputElement;
-      input.focus();
-    } catch (error) {
-      setError(error as Error);
-    } finally {
-      setLoading(false);
-    }
+    e.preventDefault();
+    const datas = Object.fromEntries(new FormData(e.target)) as unknown as PayloadCreatorProduct;
+    await createorProduct({ name: datas.name, price: Number(datas.price), quantity: Number(datas.price) });
+    form.current?.reset();
+    const input = form.current?.elements.item(0) as HTMLInputElement;
+    input.focus();
   };
 
   return (

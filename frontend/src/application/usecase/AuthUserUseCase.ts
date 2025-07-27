@@ -12,4 +12,8 @@ export class AuthUserUseCase {
     if (!user?.name) throw new Error('nome do usuario não definido');
     return user.name;
   }
+  public logoutUser() {
+    this.storageClient.delete('user');
+    this.isAuthenticate();
+  }
 }

@@ -7,7 +7,7 @@
     "dev": "concurrently \"yarn run start:frontend\" \"yarn run start:backend\"",
     "install": "concurrently \"yarn run install:frontend\" \"yarn run install:backend\"",
     "start:frontend": "cd ./frontend && yarn dev",
-    "start:backend": "cd ./backend && go run main.go",
+    "start:backend": "cd ./backend && air",
     "install:frontend": "cd ./frontend && yarn install",
     "install:backend": "cd ./backend && go mod tidy"
   }

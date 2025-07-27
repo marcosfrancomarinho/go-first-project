@@ -13,8 +13,16 @@ type GinHttpServer struct {
 
 func NewGinHttpServer() interfaces.HttpServer {
 	gin.SetMode(gin.ReleaseMode)
+	engine := gin.Default()
+	engine.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"*"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization", "Token"},
+		ExposeHeaders:    []string{"Token"},
+		AllowCredentials: true,
+	}))
 	return &GinHttpServer{
-		engine: gin.Default(),
+		engine: engine,
 	}
 }
 
@@ -24,13 +32,7 @@ func (g *GinHttpServer) On(
 	controllers interfaces.HttpControllers,
 	middlewares ...interfaces.HttpControllers,
 ) {
-	g.engine.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"*"},
-		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
-		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization", "Token"},
-		ExposeHeaders:    []string{"Token"},
-		AllowCredentials: true,
-	}))
+
 	g.engine.Handle(method, path, func(ctx *gin.Context) {
 		httpContext := NewGinHttpContext(ctx)
 

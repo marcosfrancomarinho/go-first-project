@@ -1,35 +1,24 @@
 import React from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { AlertError } from '../components/AlertError';
 import { Spinner } from '../components/Spinner';
-import { AppContext } from '../hooks/Global';
+import { useLogin } from '../../presentation/hooks/useLogin';
 
 export const Login: React.FC = () => {
-  const navigate = useNavigate();
-  const { loginUserUseCase } = React.useContext(AppContext)!;
-  const { state } = useLocation();
-  const [error, setError] = React.useState<Error | null>(null);
-  const [loadding, setLoading] = React.useState<boolean>(false);
+  const { error, loading, loginUser } = useLogin();
   const [email, setEmail] = React.useState<string>('');
   const [password, setPassword] = React.useState<string>('');
+  const { state } = useLocation();
 
   const handleSubmit = async (e: any): Promise<void> => {
-    try {
-      e.preventDefault();
-      setLoading(true);
-      setError(null);
-      await loginUserUseCase.login({ email, password });
-      navigate('/auth');
-    } catch (error) {
-      setError(error as Error);
-    } finally {
-      setLoading(false);
-    }
+    e.preventDefault();
+    await loginUser({ email, password });
   };
+
   React.useEffect(() => {
-    setEmail(state?.payload?.email ?? '');
-    setPassword(state?.payload?.password ?? '');
-  }, [state]);
+    setEmail(state?.datas?.email ?? '');
+    setPassword(state?.datas?.password ?? '');
+  }, []);
 
   return (
     <div className='flex relative justify-center items-center min-h-screen bg-gray-50 px-4'>
@@ -68,7 +57,7 @@ export const Login: React.FC = () => {
             type='submit'
             className='w-full flex items-center justify-center gap-2 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition'
           >
-            {loadding && <Spinner />}
+            {loading && <Spinner />}
             Entrar
           </button>
         </form>

@@ -1,7 +1,7 @@
 package valuesobject
 
 import (
-	"errors"
+	"github.com/marcosfrancomarinho/go-first-project/src/shared/exceptions"
 	"strings"
 )
 
@@ -19,7 +19,7 @@ func NewToken(token string) (*Token, error) {
 
 func validateToken(token string) error {
 	if len(token) == 0 {
-		return errors.New("token é obrigatorio")
+		return exceptions.ErrTokenInvalid
 	}
 	return nil
 }

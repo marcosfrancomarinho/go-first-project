@@ -1,29 +1,16 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { AppContext } from '../hooks/Global';
+import { Link } from 'react-router-dom';
 import { AlertError } from '../components/AlertError';
 import { Spinner } from '../components/Spinner';
-
-type PayloadFormSign = { name: string; email: string; password: string };
+import { useSign, type PayloadFormSign } from '../../presentation/hooks/useSign';
 
 export const Sign: React.FC = () => {
-  const [error, setError] = React.useState<Error | null>(null);
-  const [loadding, setLoading] = React.useState<boolean>(false);
-  const { signUserUseCase } = React.useContext(AppContext)!;
-  const navigate = useNavigate();
+  const { error, loading, signUser } = useSign();
+
   const submitHandler = async (e: any): Promise<void> => {
-    try {
-      e.preventDefault();
-      setLoading(true);
-      setError(null);
-      const payload = Object.fromEntries(new FormData(e.target)) as PayloadFormSign
-      await signUserUseCase.sign(payload);
-      navigate('/login', { state: { payload } });
-    } catch (error) {
-      setError(error as Error);
-    } finally {
-      setLoading(false);
-    }
+    e.preventDefault();
+    const datas = Object.fromEntries(new FormData(e.target)) as PayloadFormSign;
+    await signUser(datas);
   };
 
   return (
@@ -72,7 +59,7 @@ export const Sign: React.FC = () => {
             type='submit'
             className='w-full flex justify-center items-center gap-3 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition'
           >
-            {loadding && <Spinner />}
+            {loading && <Spinner />}
             Criar Conta
           </button>
         </form>
