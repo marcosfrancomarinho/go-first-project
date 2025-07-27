@@ -11,7 +11,7 @@ type User struct {
 type Product struct {
 	Id       string `gorm:"primaryKey"`
 	Name     string
-	Price    float32
+	Price    float64
 	Quantity int
 }
 

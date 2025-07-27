@@ -11,7 +11,7 @@ export const CreateProduct: React.FC = () => {
   const handleSubmit = async (e: any): Promise<void> => {
     e.preventDefault();
     const datas = Object.fromEntries(new FormData(e.target)) as unknown as PayloadCreatorProduct;
-    await createorProduct({ name: datas.name, price: Number(datas.price), quantity: Number(datas.price) });
+    await createorProduct({ name: datas.name, price: Number(datas.price), quantity: Number(datas.quantity) });
     form.current?.reset();
     const input = form.current?.elements.item(0) as HTMLInputElement;
     input.focus();

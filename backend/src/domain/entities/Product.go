@@ -25,13 +25,13 @@ func (p *Product) GetID() string {
 	return p.id.GetValue()
 }
 
-func (p *Product) GetPrice() float32 {
+func (p *Product) GetPrice() float64 {
 	return p.price.GetValue()
 }
 func (p *Product) GetQuantity() int {
 	return p.quantity.GetValue()
 }
 
-func (p *Product) GetTotal() float32 {
-	return p.GetPrice() * float32(p.GetQuantity())
+func (p *Product) GetTotal() float64 {
+	return p.GetPrice() * float64(p.GetQuantity())
 }

@@ -20,9 +20,13 @@ export const FindorProduct: React.FC = () => {
           products.map((product) => (
             <div key={product.id} className='bg-white rounded-lg shadow-md p-6 border border-gray-100 hover:shadow-lg transition'>
               <h3 className='text-xl font-semibold text-gray-800 mb-2'>{product.name}</h3>
-              <p className='text-gray-600'>Preço: R$ {product.price.toFixed(2)}</p>
+              <p className='text-gray-600'>
+                Preço: {product.price.toLocaleString('pt-BR', { currency: 'BRL', style: 'currency' })}
+              </p>
               <p className='text-gray-600'>Quantidade: {product.quantity}</p>
-              <p className='text-gray-800 font-medium mt-2'>Total: R$ {product.total.toFixed(2)}</p>
+              <p className='text-gray-800 font-medium mt-2'>
+                Total: {product.total.toLocaleString('pt-BR', { currency: 'BRL', style: 'currency' })}
+              </p>
             </div>
           ))}
       </div>

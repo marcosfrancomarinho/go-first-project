@@ -2,6 +2,6 @@ package dto
 
 type RequestCreatorProductDTO struct {
 	Name     string
-	Price    float32
+	Price    float64
 	Quantity int
 }

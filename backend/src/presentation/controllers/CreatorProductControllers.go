@@ -16,7 +16,7 @@ func NewCreatorProductControllers(creatorProductUseCase *usecase.CreatorProductU
 
 type RawCreatorProduct struct {
 	Name     string
-	Price    float32
+	Price    float64
 	Quantity int
 }
 
