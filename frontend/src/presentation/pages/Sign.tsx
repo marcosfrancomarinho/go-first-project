@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { AlertError } from '../components/AlertError';
 import { Spinner } from '../components/Spinner';
-import { useSign, type PayloadFormSign } from '../../presentation/hooks/useSign';
+import { useSign, type PayloadFormSign } from '../hooks/useSign';
 
 export const Sign: React.FC = () => {
   const { error, loading, signUser } = useSign();

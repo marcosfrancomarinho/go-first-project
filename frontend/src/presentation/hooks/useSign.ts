@@ -19,11 +19,11 @@ export const useSign = () => {
       try {
         setLoading(true);
         setError(null);
-        const payload: RequestSignUserDTO = { email: datas.email, name: datas.name, password: datas.password, path: '/register' };
+        const payload: RequestSignUserDTO = { email: datas.email, name: datas.name, password: datas.password };
         await signUserUseCase.sign(payload);
         navigate('/login', { state: { datas } });
       } catch (error: any) {
-        setError(error)
+        setError(error);
       } finally {
         setLoading(false);
       }

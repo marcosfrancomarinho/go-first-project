@@ -3,8 +3,9 @@ import { CreatorProductUseCase } from '../../application/usecase/CreatorProductU
 import { FindorProductUseCase } from '../../application/usecase/FindorProductUseCase';
 import { LoginUserUseCase } from '../../application/usecase/LoginUserUseCase';
 import { SignUserUseCase } from '../../application/usecase/SignUserUseCase';
-import { AxiosHttpClient } from '../../infrastructure/http/AxiosHttpClient';
-import { LocalStorageClient } from '../../infrastructure/storage/LocalStorageClient';
+import { AxiosHttpGetClient } from '../../infrastructure/http/AxiosHttpGetClient';
+import { AxiosHttpPostClient } from '../../infrastructure/http/AxiosHttpPostClient';
+import { CookiesClient } from '../../infrastructure/storage/CookiesClient';
 
 export interface AppConfig {
   signUserUseCase: SignUserUseCase;
@@ -14,8 +15,6 @@ export interface AppConfig {
   authUserUseCase: AuthUserUseCase;
 }
 
-
-
 export class Container {
   private static instance: Container;
 
@@ -24,14 +23,15 @@ export class Container {
     return this.instance;
   }
 
-  public dependencies():AppConfig {
-    const httpClient = new AxiosHttpClient('http://localhost:8080');
-    const signUserUseCase = new SignUserUseCase(httpClient);
-    const localStorageClient = new LocalStorageClient();
-    const loginUserUseCase = new LoginUserUseCase(httpClient, localStorageClient);
-    const findorProductUseCase = new FindorProductUseCase(httpClient, localStorageClient);
-    const creatorProductUseCase = new CreatorProductUseCase(httpClient, localStorageClient);
-    const authUserUseCase = new AuthUserUseCase(localStorageClient)
+  public dependencies(): AppConfig {
+    const httpGetClient = new AxiosHttpGetClient('http://localhost:8080');
+    const httpPostClient = new AxiosHttpPostClient('http://localhost:8080');
+    const signUserUseCase = new SignUserUseCase(httpPostClient, '/register');
+    const localStorageClient = new CookiesClient();
+    const loginUserUseCase = new LoginUserUseCase(httpPostClient, localStorageClient, '/login', 'user');
+    const findorProductUseCase = new FindorProductUseCase(httpGetClient, localStorageClient, '/product', 'user');
+    const creatorProductUseCase = new CreatorProductUseCase(httpPostClient, localStorageClient, '/product', 'user');
+    const authUserUseCase = new AuthUserUseCase(localStorageClient, 'user');
     return {
       signUserUseCase,
       loginUserUseCase,

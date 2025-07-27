@@ -1,13 +1,13 @@
 import React from 'react';
 import { Fallback } from '../components/Fallback';
-import { useFindorProduct } from '../../presentation/hooks/useFindorProduct';
+import { useFindorProduct } from '../hooks/useFindorProduct';
 
 export const FindorProduct: React.FC = () => {
   const { error, loading, products, findorProduct } = useFindorProduct();
 
   React.useEffect(() => {
     findorProduct();
-  }, [ findorProduct]);
+  }, [findorProduct]);
 
   if (loading) return <Fallback loading={loading} />;
   if (error) return <Fallback error={error} />;

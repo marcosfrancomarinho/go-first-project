@@ -1,9 +1,8 @@
 import React from 'react';
-import { AppContext } from '../context/Global';
-import type { ResponseFindorProductDTO } from '../../application/dto/ResponseFindorProductDTO';
-import type { ResquestFindorProductDTO } from '../../application/dto/ResquestFindorProductDTO';
-import { TokenExpiredError } from '../../shared/erros/TokenExpiredError';
 import { useNavigate } from 'react-router';
+import type { ResponseFindorProductDTO } from '../../application/dto/ResponseFindorProductDTO';
+import { TokenExpiredError } from '../../shared/erros/TokenExpiredError';
+import { AppContext } from '../context/Global';
 
 export const useFindorProduct = () => {
   const { findorProductUseCase, authUserUseCase } = React.useContext(AppContext)!;
@@ -16,8 +15,7 @@ export const useFindorProduct = () => {
     try {
       setLoading(true);
       setError(null);
-      const payload: ResquestFindorProductDTO = { key: 'user', path: '/product' };
-      const result = await findorProductUseCase.findAll(payload);
+      const result = await findorProductUseCase.findAll();
       setProducts(result);
     } catch (error: any) {
       if (error instanceof TokenExpiredError) {

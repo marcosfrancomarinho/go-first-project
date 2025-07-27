@@ -1,0 +1,21 @@
+import axios, { AxiosError, type AxiosInstance } from 'axios';
+import type { HttpPostClient } from '../../domain/gateway/HttpPostClient';
+import { TokenExpiredError } from '../../shared/erros/TokenExpiredError';
+
+export class AxiosHttpPostClient implements HttpPostClient {
+  instance: AxiosInstance;
+  public constructor(baseURL: string) {
+    this.instance = axios.create({ baseURL });
+  }
+  public async post<T>(path: string, datas: any, config: any): Promise<T> {
+    try {
+      const response = await this.instance.post(path, datas, { headers: { ...config } });
+      return response.data;
+    } catch (error: any) {
+      if (error.response.data.code === 'TOKEN_ERROR')  throw new TokenExpiredError(error.response.data.code);
+      if (error instanceof AxiosError) throw new Error(error.response?.data.error);
+      throw new Error(error.message);
+    }
+  }
+ 
+}

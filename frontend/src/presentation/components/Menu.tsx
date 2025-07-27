@@ -1,9 +1,10 @@
 import React from 'react';
-import { useMenu } from '../../presentation/hooks/useMenu';
+import { FaUser } from 'react-icons/fa';
 import { NavItem } from './NavItem';
+import { useMenu } from '../hooks/useMenu';
 
-export const Baseboard: React.FC = () => {
-  const { authenticated, loadMenu, logout } = useMenu();
+export const Menu: React.FC = () => {
+  const { authenticated, loadMenu, name } = useMenu();
   React.useEffect(() => {
     loadMenu();
   }, []);
@@ -13,11 +14,15 @@ export const Baseboard: React.FC = () => {
       {authenticated ? (
         <>
           <div className='flex gap-4'>
-            <div onClick={logout} className='hover:underline transition cursor-pointer duration-200 ease-in-out'>
-              Sair da Conta
-            </div>
+            <NavItem to='/auth' label='Home' />
             <NavItem to='/auth/create-product' label='Cadastrar Produtos' />
             <NavItem to='/auth/find-product' label='Buscar Produtos' />
+          </div>
+          <div className='flex items-center gap-2 bg-blue-700 px-3 py-1 rounded'>
+            <FaUser />
+            <span>
+              Bem-vindo, <span className='lowercase'>{name}</span>
+            </span>
           </div>
         </>
       ) : (

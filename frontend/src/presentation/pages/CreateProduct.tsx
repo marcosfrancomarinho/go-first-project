@@ -2,7 +2,7 @@ import React from 'react';
 import { AlertError } from '../components/AlertError';
 import { AlertSuccess } from '../components/AlertSucess';
 import { Spinner } from '../components/Spinner';
-import { useCreatorProduct, type PayloadCreatorProduct } from '../../presentation/hooks/useCreatorProduct';
+import { useCreatorProduct, type PayloadCreatorProduct } from '../hooks/useCreatorProduct';
 
 export const CreateProduct: React.FC = () => {
   const { error, loadding, success, createorProduct } = useCreatorProduct();

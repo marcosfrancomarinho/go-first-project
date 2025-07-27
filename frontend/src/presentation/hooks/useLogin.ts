@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router';
 import type { RequestLoginUserDTO } from '../../application/dto/RequestLoginUserDTO';
 import { AppContext } from '../context/Global';
+
 export type PayloadLogin = {
   email: string;
   password: string;
@@ -21,8 +22,6 @@ export const useLogin = () => {
         const payload: RequestLoginUserDTO = {
           email: datas.email,
           password: datas.password,
-          path: '/login',
-          key: 'user',
         };
         await loginUserUseCase.login(payload);
         navigate('/auth');

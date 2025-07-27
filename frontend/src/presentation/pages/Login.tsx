@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { AlertError } from '../components/AlertError';
 import { Spinner } from '../components/Spinner';
-import { useLogin } from '../../presentation/hooks/useLogin';
+import { useLogin } from '../hooks/useLogin';
 
 export const Login: React.FC = () => {
   const { error, loading, loginUser } = useLogin();
