@@ -21,7 +21,7 @@ export const Fallback: React.FC<FallbackProps> = ({ error, loading }) => {
     return (
       <div className='flex p-5 flex-col items-center justify-center text-red-600'>
         <FiAlertCircle className='text-4xl' />
-        <p className='mt-2 font-medium'>Algo deu errado.</p>
+        <p className='mt-2 font-medium'>Atenção.</p>
         <code className='text-xs text-gray-500'>{error.message}</code>
       </div>
     );

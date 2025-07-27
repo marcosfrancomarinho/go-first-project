@@ -2,6 +2,7 @@ package http
 
 import (
 	"errors"
+	"fmt"
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
@@ -30,10 +31,19 @@ func (g *GinHttpContext) Send(status int, datas any, token ...string) {
 
 func (g *GinHttpContext) SendError(err error) {
 	code := "ERROR"
-	if errors.Is(err, jwt.ErrInvalidType) || errors.Is(err, jwt.ErrTokenMalformed) || errors.Is(err, exceptions.ErrTokenInvalid) {
-		code = "TOKEN_ERROR"
+	tokenErros := []error{
+		jwt.ErrInvalidType,
+		jwt.ErrTokenMalformed,
+		exceptions.ErrTokenInvalid,
+		jwt.ErrTokenExpired,
+		jwt.ErrSignatureInvalid,
 	}
-
+	for _, error := range tokenErros {
+		if errors.Is(err, error) {
+			code = "TOKEN_ERROR"
+			break
+		}
+	}
 	g.ctx.JSON(400, gin.H{
 		"error":  err.Error(),
 		"status": false,
@@ -56,4 +66,12 @@ func (g *GinHttpContext) GetIdentifiers(key string) (any, error) {
 		return nil, errors.New("dados da chave informada não encontrado")
 	}
 	return value, nil
+}
+
+func (g *GinHttpContext) GetParams(key string) (*string, error) {
+	id := g.ctx.Param(key)
+	if len(id) == 0 {
+		return nil, fmt.Errorf("parametro %s não foi fornecido", key)
+	}
+	return &id, nil
 }

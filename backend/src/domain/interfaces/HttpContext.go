@@ -7,4 +7,5 @@ type HttpContext interface {
 	GetToken() string
 	SetIdentifiers(key string, datas any)
 	GetIdentifiers(key string) (any, error)
+	GetParams(key string) (*string, error)
 }

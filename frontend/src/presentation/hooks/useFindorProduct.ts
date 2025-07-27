@@ -28,5 +28,5 @@ export const useFindorProduct = () => {
     }
   }, [findorProductUseCase, , authUserUseCase, navigate]);
 
-  return { products, error, loading, findorProduct };
+  return { products, error, loading, findorProduct, setError };
 };

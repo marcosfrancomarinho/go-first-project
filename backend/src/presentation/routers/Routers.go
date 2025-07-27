@@ -23,4 +23,6 @@ func (r *Routers) Register(container *container.Container) {
 	r.server.On("POST", "/product", handlers.CreatorProductControllers, handlers.UserAuthenticatorMiddlewares)
 
 	r.server.On("GET", "/product", handlers.FindorProductControllers, handlers.UserAuthenticatorMiddlewares)
+
+	r.server.On("DELETE", "/product/:id", handlers.DeleterProductController, handlers.UserAuthenticatorMiddlewares)
 }

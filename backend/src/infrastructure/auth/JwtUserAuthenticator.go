@@ -80,10 +80,11 @@ func (j *JwtUserAuthenticator) ValidateToken(token *valuesobject.Token) (*values
 		return jwtKey, nil
 	})
 	if err != nil {
-		return nil, err
+		return nil, jwt.ErrSignatureInvalid
 	}
 
 	if !parsedToken.Valid {
+		
 		return nil, errors.New("token invalido")
 	}
 

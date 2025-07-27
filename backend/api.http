@@ -20,10 +20,26 @@ Content-Type: application/json
 ### 
 POST http://localhost:8080/product
 Content-Type: application/json
-Token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwY2JlMDI4ZC1jMjZkLTRmZDUtYTk4Zi00ODgxMTVmMTJiMzEiLCJleHAiOjE3NTI0NDczODV9.WHZlEL9pAlAM3muphJJmjRasnb-zsjs9Z3bw6O49sD8
+Token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwNWQ0MjFmZC1jZTY4LTQ1YjUtODY0Ni0zMjljZDQwNDUyNTIiLCJleHAiOjE3NTM2NTQ0NzB9.sVeZ6y6HR_ZkRleaPNx18ZNzYA-B8Ic4JQZrEcrs5q4
 
 {
     "Name":"ar condicionado",
     "Price":2555.99,
     "Quantity":2
 }
+
+
+###
+DELETE  http://localhost:8080/product
+Content-Type: application/json
+Token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwNWQ0MjFmZC1jZTY4LTQ1YjUtODY0Ni0zMjljZDQwNDUyNTIiLCJleHAiOjE3NTM2NTQ0NzB9.sVeZ6y6HR_ZkRleaPNx18ZNzYA-B8Ic4JQZrEcrs5q4
+
+{
+    "Id":"11"
+}
+
+
+###
+GET  http://localhost:8080/product
+Content-Type: application/json
+Token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwNWQ0MjFmZC1jZTY4LTQ1YjUtODY0Ni0zMjljZDQwNDUyNTIiLCJleHAiOjE3NTM2NTQ0NzB9.sVeZ6y6HR_ZkRleaPNx18ZNzYA-B8Ic4JQZrEcrs5q4
