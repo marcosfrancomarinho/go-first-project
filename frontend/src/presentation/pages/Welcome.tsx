@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const Welcome: React.FC = () => {
   return (
-    <div className='max-w-5xl mx-auto mt-10 px-4 text-center'>
+    <div className='max-w-5xl mx-auto mt-5 px-4 text-center'>
       <h2 className='text-4xl font-bold text-blue-700 mb-4'>Bem-vindo à Tools Ltda</h2>
       <p className='text-gray-700 mb-8 text-lg'>
         Aqui você encontra as melhores ferramentas e soluções para o seu negócio. Faça login, cadastre-se ou gerencie seus

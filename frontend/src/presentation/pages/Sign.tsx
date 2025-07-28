@@ -14,9 +14,9 @@ export const Sign: React.FC = () => {
   };
 
   return (
-    <div className='flex relative justify-center items-center min-h-screen bg-gray-50 px-4'>
+    <div className='flex relative justify-center items-center sm:min-h-screen bg-gray-50 px-4'>
       {error && <AlertError message={error.message} />}
-      <div className='bg-white p-8 rounded-xl shadow-md w-full max-w-md'>
+      <div className='bg-white mt-5 p-8 rounded-xl shadow-md w-full max-w-md'>
         <h2 className='text-2xl font-bold text-center text-blue-600 mb-6'>Cadastro - Tools Ltda</h2>
         <form onSubmit={(e) => submitHandler(e)} className='space-y-4'>
           <div>

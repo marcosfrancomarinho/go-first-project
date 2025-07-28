@@ -3,7 +3,7 @@ import { Menu } from './Menu';
 import { Hamburguer } from './Hamburguer';
 
 export const Header: React.FC = () => {
-  const [menuOpen, setMenuOpen] = React.useState(true);
+  const [menuOpen, setMenuOpen] = React.useState(false);
   return (
     <header className='bg-blue-600 text-white shadow-md'>
       <div className=' mx-auto flex flex-col sm:flex-row  sm:items-center justify-between px-4 py-3'>

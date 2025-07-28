@@ -18,10 +18,10 @@ export const CreateProduct: React.FC = () => {
   };
 
   return (
-    <div className='flex relative justify-center items-center min-h-screen bg-gray-50 px-4'>
+    <div className='flex relative justify-center items-center sm:min-h-screen bg-gray-50 px-4'>
       {success && <AlertSuccess message={success} />}
       {error && <AlertError message={error.message} />}
-      <div className='bg-white p-8 rounded-xl shadow-md w-full max-w-xl'>
+      <div className='bg-white p-8 mt-4 rounded-xl shadow-md w-full max-w-xl'>
         <h2 className='text-2xl font-bold text-center text-blue-600 mb-6'>Criar Produto - Tools Ltda</h2>
 
         <form ref={form} onSubmit={(e) => handleSubmit(e)} className='space-y-4'>

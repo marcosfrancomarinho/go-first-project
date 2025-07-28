@@ -25,7 +25,7 @@ export const FindorProduct: React.FC = () => {
   if (loading) return <Fallback loading={loading} />;
   if (error) return <Fallback error={error} />;
   return (
-    <div className='max-w-7xl mx-auto px-4 py-10 relative  flex flex-col'>
+    <div className='max-w-7xl mx-auto px-4 py-10 relative flex flex-col'>
       {messageError && <AlertError message={messageError.message} />}
       {messageSuccess && <AlertSuccess message={messageSuccess} />}
       <h2 className='text-3xl font-bold text-blue-700 mb-6 text-center'>Produtos Cadastrados</h2>
