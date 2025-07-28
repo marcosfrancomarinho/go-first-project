@@ -27,7 +27,7 @@ export class Container {
   }
 
   public dependencies(): AppConfig {
-    const baseURL = import.meta.env.VITE_URL ?? import.meta.env.PROD
+    const baseURL = import.meta.env.VITE_URL ?? "https://tool-backend-na56.onrender.com"
     const key: string = 'user';
     const httpGetClient = new AxiosHttpGetClient(baseURL);
     const httpPostClient = new AxiosHttpPostClient(baseURL);
