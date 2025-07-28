@@ -1,8 +1,7 @@
 import React from 'react';
+import { useNavigate } from 'react-router';
 import type { RequestCreatorProductDTO } from '../../application/dto/RequestCreatorProductDTO';
 import { AppContext } from '../context/Global';
-import { useNavigate } from 'react-router';
-import { TokenExpiredError } from '../../shared/erros/TokenExpiredError';
 export type PayloadCreatorProduct = {
   name: string;
   price: number;
@@ -30,10 +29,7 @@ export const useCreatorProduct = () => {
         const { message } = await creatorProductUseCase.create(payload);
         setSuccess(message);
       } catch (error: any) {
-        if (error instanceof TokenExpiredError) {
-          authUserUseCase.logoutUser();
-          navigate('/');
-        }
+        !authUserUseCase.isAuthenticate() && navigate('/');
         setError(error);
       } finally {
         setLoading(false);

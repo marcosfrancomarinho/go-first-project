@@ -27,7 +27,7 @@ export class Container {
   }
 
   public dependencies(): AppConfig {
-    const baseURL: string = 'http://localhost:8080';
+    const baseURL = import.meta.env.VITE_URL
     const key: string = 'user';
     const httpGetClient = new AxiosHttpGetClient(baseURL);
     const httpPostClient = new AxiosHttpPostClient(baseURL);

@@ -1,6 +1,6 @@
 import axios, { AxiosError, type AxiosInstance } from 'axios';
 import type { HttpPostClient } from '../../domain/gateway/HttpPostClient';
-import { TokenExpiredError } from '../../shared/erros/TokenExpiredError';
+import { TokenError } from '../../shared/erros/TokenError';
 
 export class AxiosHttpPostClient implements HttpPostClient {
   instance: AxiosInstance;
@@ -12,10 +12,10 @@ export class AxiosHttpPostClient implements HttpPostClient {
       const response = await this.instance.post(path, datas, { headers: { ...config } });
       return response.data;
     } catch (error: any) {
-      if (error.response.data.code === 'TOKEN_ERROR')  throw new TokenExpiredError(error.response.data.code);
-      if (error instanceof AxiosError) throw new Error(error.response?.data.error);
+      const data = error.response.data;
+      if (data.code === 'TOKEN_ERROR') throw new TokenError(data.error);
+      if (error instanceof AxiosError) throw new Error(data.error);
       throw new Error(error.message);
     }
   }
- 
 }

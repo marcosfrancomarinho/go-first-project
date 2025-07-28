@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
 import type { ResponseFindorProductDTO } from '../../application/dto/ResponseFindorProductDTO';
-import { TokenExpiredError } from '../../shared/erros/TokenExpiredError';
 import { AppContext } from '../context/Global';
 
 export const useFindorProduct = () => {
@@ -18,10 +17,7 @@ export const useFindorProduct = () => {
       const result = await findorProductUseCase.findAll();
       setProducts(result);
     } catch (error: any) {
-      if (error instanceof TokenExpiredError) {
-        authUserUseCase.logoutUser();
-        navigate('/');
-      }
+      !authUserUseCase.isAuthenticate() && navigate('/');
       setError(error);
     } finally {
       setLoading(false);

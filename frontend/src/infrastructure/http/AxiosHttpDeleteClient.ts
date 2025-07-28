@@ -1,6 +1,6 @@
 import axios, { AxiosError, type AxiosInstance } from 'axios';
 import type { HttpDeleteClient } from '../../domain/gateway/HttpDeleteClient';
-import { TokenExpiredError } from '../../shared/erros/TokenExpiredError';
+import { TokenError } from '../../shared/erros/TokenError';
 
 export class AxiosHttpDeleteClient implements HttpDeleteClient {
   instance: AxiosInstance;
@@ -14,8 +14,8 @@ export class AxiosHttpDeleteClient implements HttpDeleteClient {
       return response.data;
     } catch (error: any) {
       const data = error.response.data;
-      if (data.code === 'TOKEN_ERROR') throw new TokenExpiredError(data.code, data.error);
-      if (error instanceof AxiosError) throw new Error(error.response?.data.error);
+      if (data.code === 'TOKEN_ERROR') throw new TokenError(data.error);
+      if (error instanceof AxiosError) throw new Error(data.error);
       throw new Error(error.message);
     }
   }

@@ -1,6 +1,6 @@
 import axios, { AxiosError, type AxiosInstance } from 'axios';
 import type { HttpGetClient } from '../../domain/gateway/HttpGetClient';
-import { TokenExpiredError } from '../../shared/erros/TokenExpiredError';
+import { TokenError } from '../../shared/erros/TokenError';
 
 export class AxiosHttpGetClient implements HttpGetClient {
   instance: AxiosInstance;
@@ -15,8 +15,9 @@ export class AxiosHttpGetClient implements HttpGetClient {
       });
       return response.data;
     } catch (error: any) {
-      if (error.response.data.code === 'TOKEN_ERROR')  throw new TokenExpiredError(error.response.data.code);
-      if (error instanceof AxiosError) throw new Error(error.response?.data.error);
+      const data = error.response.data;
+      if (data.code === 'TOKEN_ERROR') throw new TokenError(data.error);
+      if (error instanceof AxiosError) throw new Error(data.error);
       throw new Error(error.message);
     }
   }
