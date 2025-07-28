@@ -3,7 +3,7 @@ type ParamsButton = { menuOpen: boolean; setMenuOpen: (value: boolean) => void }
 export const Hamburguer: React.FC<ParamsButton> = ({ menuOpen, setMenuOpen }) => {
   return (
     <button
-      className='md:hidden p-2 rounded bg-blue-700'
+      className='sm:hidden p-2 rounded bg-blue-700'
       aria-label='Alternar menu'
       aria-expanded={menuOpen}
       onClick={() => setMenuOpen(!menuOpen)}
