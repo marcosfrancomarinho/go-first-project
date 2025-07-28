@@ -2,35 +2,40 @@ import React from 'react';
 import { Fallback } from '../components/Fallback';
 import { useFindorProduct } from '../hooks/useFindorProduct';
 import { useDeleterProduct } from '../hooks/useDeleterProduct';
+import { ConfirmDialog } from '../components/ConfirmDialog';
+import { useConfirmDeleteProduct } from '../hooks/useConfirmDeleteProduct';
+import { AlertSuccess } from '../components/AlertSucess';
+import { AlertError } from '../components/AlertError';
 
 export const FindorProduct: React.FC = () => {
-  const { error, loading, products, findorProduct, setError } = useFindorProduct();
-  const { deleterProduct } = useDeleterProduct();
+  const { error, loading, products, findorProduct } = useFindorProduct();
+  const { confirmDeleterProduct, messageSuccess, messageError } = useDeleterProduct();
+  const { choiseProductToRemove, id, index, showBox, setShowBox } = useConfirmDeleteProduct();
+
   React.useEffect(() => {
     findorProduct();
   }, [findorProduct]);
 
-  const deleteProduct = async (id: string, index: number) => {
-    const response = confirm('deseja excuir');
-    if (response) {
-      await deleterProduct({ id });
-      products?.splice(index, 1);
-    }
-    if (products?.length === 0) setError(new Error('nenhum produto encontrado'));
+  const removeProduct = async () => {
+    await confirmDeleterProduct({ id });
+    setShowBox(false);
+    products?.splice(index, 1);
   };
 
   if (loading) return <Fallback loading={loading} />;
   if (error) return <Fallback error={error} />;
   return (
-    <div className='max-w-7xl mx-auto px-4 py-10'>
+    <div className='max-w-7xl mx-auto px-4 py-10 relative  flex flex-col'>
+      {messageError && <AlertError message={messageError.message} />}
+      {messageSuccess && <AlertSuccess message={messageSuccess} />}
       <h2 className='text-3xl font-bold text-blue-700 mb-6 text-center'>Produtos Cadastrados</h2>
-
+      {showBox && <ConfirmDialog onConfirm={removeProduct} message='Deseja Excluir' onCancel={() => setShowBox(false)} />}
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6'>
         {products &&
           products.map((product, index) => (
             <div
               key={product.id}
-              onClick={() => deleteProduct(product.id, index)}
+              onClick={() => choiseProductToRemove(product.id, index)}
               className='bg-white rounded-lg shadow-md p-6 border cursor-pointer border-gray-100 hover:shadow-lg transition'
             >
               <h3 className='text-xl font-semibold text-gray-800 mb-2'>{product.name}</h3>

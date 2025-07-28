@@ -8,12 +8,14 @@ export type PayloadDeleterProduct = {
 
 export const useDeleterProduct = () => {
   const [messageSuccess, setMessageSuccess] = React.useState<string>('');
-  const [messageError, setMessageError] = React.useState<string>('');
+  const [messageError, setMessageError] = React.useState<Error | null>(null);
   const { deleterProductUseCase } = React.useContext(AppContext)!;
 
-  const deleterProduct = React.useCallback(
+  const confirmDeleterProduct = React.useCallback(
     async (datas: PayloadDeleterProduct) => {
       try {
+        setMessageSuccess('');
+        setMessageError(null);
         const payload: RequestDeleterProductDTO = { id: datas.id };
         const { message } = await deleterProductUseCase.delete(payload);
         setMessageSuccess(message);
@@ -24,5 +26,5 @@ export const useDeleterProduct = () => {
     [deleterProductUseCase]
   );
 
-  return { deleterProduct, messageSuccess, messageError };
+  return { confirmDeleterProduct, messageSuccess, messageError };
 };

@@ -13,7 +13,8 @@ export class AxiosHttpDeleteClient implements HttpDeleteClient {
       const response = await this.instance.delete(`${path}/${datas}`, { headers: { ...config } });
       return response.data;
     } catch (error: any) {
-      if (error.response.data.code === 'TOKEN_ERROR') throw new TokenExpiredError(error.response.data.code);
+      const data = error.response.data;
+      if (data.code === 'TOKEN_ERROR') throw new TokenExpiredError(data.code, data.error);
       if (error instanceof AxiosError) throw new Error(error.response?.data.error);
       throw new Error(error.message);
     }

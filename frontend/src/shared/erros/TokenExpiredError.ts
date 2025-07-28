@@ -1,5 +1,5 @@
 export class TokenExpiredError extends Error {
-  public constructor(public code: string) {
-    super();
+  public constructor(public code: string, message?: string) {
+    super(message);
   }
 }
