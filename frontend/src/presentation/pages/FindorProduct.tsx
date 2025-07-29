@@ -6,15 +6,16 @@ import { ConfirmDialog } from '../components/ConfirmDialog';
 import { useConfirmDeleteProduct } from '../hooks/useConfirmDeleteProduct';
 import { AlertSuccess } from '../components/AlertSucess';
 import { AlertError } from '../components/AlertError';
+import { Pagination } from '../components/Pagination';
 
 export const FindorProduct: React.FC = () => {
-  const { error, loading, products, findorProduct } = useFindorProduct();
+  const { error, loading, products, findorProduct, total, QUANTITY_OF_PRODUCT_PER_PAGE } = useFindorProduct();
   const { confirmDeleterProduct, messageSuccess, messageError } = useDeleterProduct();
   const { choiseProductToRemove, id, index, showBox, setShowBox } = useConfirmDeleteProduct();
-
+  const [page, setPage] = React.useState<number>(1);
   React.useEffect(() => {
-    findorProduct();
-  }, [findorProduct]);
+    findorProduct({ page });
+  }, [page]);
 
   const removeProduct = async () => {
     await confirmDeleterProduct({ id });
@@ -49,6 +50,12 @@ export const FindorProduct: React.FC = () => {
             </div>
           ))}
       </div>
+      <Pagination
+        limit={QUANTITY_OF_PRODUCT_PER_PAGE.current}
+        onPageChange={(newPage) => setPage(newPage)}
+        page={page}
+        total={total}
+      />
     </div>
   );
 };

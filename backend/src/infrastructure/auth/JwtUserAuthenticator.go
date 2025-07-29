@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"time"
+
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/joho/godotenv"
 	"github.com/marcosfrancomarinho/go-first-project/src/domain/entities"
@@ -51,7 +52,6 @@ func (j *JwtUserAuthenticator) GenerateToken(user *entities.UserRegister) (*valu
 			ExpiresAt: jwt.NewNumericDate(expirationTime),
 		},
 	}
-
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claimsOptions)
 
 	hash, err := token.SignedString(jwtKey)
@@ -73,9 +73,9 @@ func (j *JwtUserAuthenticator) ValidateToken(token *valuesobject.Token) (*values
 		return nil, err
 	}
 
-	parsedToken, err := jwt.ParseWithClaims(token.GetValue(), &claims{}, func(t *jwt.Token) (any, error) {
-		if _, ok := t.Method.(*jwt.SigningMethodHMAC); !ok {
-			return nil, fmt.Errorf("método de assinatura inesperado: %v", t.Header["alg"])
+	parsedToken, err := jwt.ParseWithClaims(token.GetValue(), &claims{}, func(token *jwt.Token) (any, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, fmt.Errorf("método de assinatura inesperado: %v", token.Header["alg"])
 		}
 		return jwtKey, nil
 	})
@@ -85,9 +85,8 @@ func (j *JwtUserAuthenticator) ValidateToken(token *valuesobject.Token) (*values
 
 	if !parsedToken.Valid {
 		
-		return nil, errors.New("token invalido")
+		return nil, jwt.ErrTokenMalformed
 	}
-
 	claims, ok := parsedToken.Claims.(*claims)
 	if !ok {
 		return nil, errors.New("falha ao converter claims")

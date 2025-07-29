@@ -3,7 +3,6 @@ package http
 import (
 	"errors"
 	"fmt"
-
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/marcosfrancomarinho/go-first-project/src/domain/interfaces"
@@ -74,4 +73,19 @@ func (g *GinHttpContext) GetParams(key string) (*string, error) {
 		return nil, fmt.Errorf("parametro %s não foi fornecido", key)
 	}
 	return &id, nil
+}
+
+func (g *GinHttpContext) GetQuery(keys ...string) (map[string]string, error) {
+	queries := make(map[string]string)
+
+	for _, key := range keys {
+		query := g.ctx.Query(key)
+
+		if len(query) == 0 {
+			return nil, fmt.Errorf("query param '%s' inválido ou não definido", key)
+		}
+
+		queries[key] = query
+	}
+	return queries, nil
 }

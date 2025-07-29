@@ -1,7 +1,11 @@
 package interfaces
 
-import "github.com/marcosfrancomarinho/go-first-project/src/domain/entities"
+import (
+	"github.com/marcosfrancomarinho/go-first-project/src/domain/entities"
+	"github.com/marcosfrancomarinho/go-first-project/src/domain/valuesobject"
+)
 
 type FindorProduct interface {
-	FindAll() (*[]entities.Product, error)
+	FindAll(container *entities.ContainerPage) (*[]entities.Product, error)
+	TotalCount() (*valuesobject.Quantity, error)
 }

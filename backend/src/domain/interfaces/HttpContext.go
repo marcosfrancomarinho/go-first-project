@@ -8,4 +8,5 @@ type HttpContext interface {
 	SetIdentifiers(key string, datas any)
 	GetIdentifiers(key string) (any, error)
 	GetParams(key string) (*string, error)
+	GetQuery(key ...string) (map[string]string, error)
 }

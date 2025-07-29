@@ -1,8 +1,6 @@
 package controllers
 
 import (
-	"fmt"
-
 	"github.com/marcosfrancomarinho/go-first-project/src/application/dto"
 	"github.com/marcosfrancomarinho/go-first-project/src/application/usecase"
 	"github.com/marcosfrancomarinho/go-first-project/src/domain/interfaces"
@@ -21,7 +19,6 @@ func NewDeleterProductController(deleterProductUseCase *usecase.DeleterProductUs
 }
 
 func (d *DeleterProductController) Execute(httpContext interfaces.HttpContext) {
-	var raw RawDeleterProduct
 
 	id, err := httpContext.GetParams("id")
 
@@ -29,7 +26,7 @@ func (d *DeleterProductController) Execute(httpContext interfaces.HttpContext) {
 		httpContext.SendError(err)
 		return
 	}
-	fmt.Println(raw)
+
 	input := &dto.RequestDeleterProductDTO{Id: *id}
 
 	output, err := d.deleterProductUseCase.Delete(input)
