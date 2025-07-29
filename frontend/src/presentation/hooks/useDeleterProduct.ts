@@ -28,5 +28,5 @@ export const useDeleterProduct = () => {
     [deleterProductUseCase]
   );
 
-  return { confirmDeleterProduct, messageSuccess, messageError };
+  return { confirmDeleterProduct, messageSuccess, messageError, setMessageSuccess };
 };
