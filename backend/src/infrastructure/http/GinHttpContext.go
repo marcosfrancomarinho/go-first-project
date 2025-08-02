@@ -55,17 +55,6 @@ func (g *GinHttpContext) GetToken() string {
 	return token
 }
 
-func (g *GinHttpContext) SetIdentifiers(key string, datas any) {
-	g.ctx.Set(key, datas)
-}
-
-func (g *GinHttpContext) GetIdentifiers(key string) (any, error) {
-	value, exitst := g.ctx.Get(key)
-	if !exitst {
-		return nil, errors.New("dados da chave informada não encontrado")
-	}
-	return value, nil
-}
 
 func (g *GinHttpContext) GetParams(key string) (*string, error) {
 	id := g.ctx.Param(key)

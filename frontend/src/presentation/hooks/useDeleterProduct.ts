@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router';
 
 export type PayloadDeleterProduct = {
   id: string;
+  userName: string;
 };
 
 export const useDeleterProduct = () => {
@@ -18,7 +19,8 @@ export const useDeleterProduct = () => {
         setMessageSuccess('');
         setMessageError(null);
         const payload: RequestDeleterProductDTO = { id: datas.id };
-        const { message } = await deleterProductUseCase.delete(payload);
+        const message: string = `product ${datas.userName} excluido com sucesso.`;
+        await deleterProductUseCase.delete(payload);
         setMessageSuccess(message);
       } catch (error: any) {
         !authUserUseCase.isAuthenticate() && navigate('/');
@@ -28,5 +30,5 @@ export const useDeleterProduct = () => {
     [deleterProductUseCase]
   );
 
-  return { confirmDeleterProduct, messageSuccess, messageError, setMessageSuccess };
+  return { confirmDeleterProduct, messageSuccess, messageError, setMessageSuccess, setMessageError };
 };

@@ -1,16 +1,16 @@
 #!/bin/bash
 
 # Total de requisições
-TOTAL=100
+TOTAL=20
 
 # Quantas em paralelo
 PARALLEL=10
 
 # URL do endpoint
-URL="https://tool-backend-na56.onrender.com/product"
+URL="http://localhost:8080/product"
 
 # Token JWT
-TOKEN="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwMjlhOWY0My05MTQzLTRkNjQtYjA0MC04Y2I4ODVhZWVlNzYiLCJleHAiOjE3NTM3NTQxMDB9.raeLM4kO27Vk8-HtBUMmMXEB7vn7AjyZ-woBkm6qCm0"
+TOKEN="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmMzE5NGE2Ni1iYzExLTQxYjktYjZjYi04NmExZjI2ZjhlMzQiLCJleHAiOjE3NTQxNDg1MjN9.RsrGCA6gE0F9DXQ40CPwWf0z_SDAk_yAHNq1D-9vk00"
 
 # Cabeçalhos
 HEADER_CONTENT_TYPE="Content-Type: application/json"

@@ -10,17 +10,18 @@ import { Pagination } from '../components/Pagination';
 
 export const FindorProduct: React.FC = () => {
   const { error, loading, products, findorProduct, total, QUANTITY_OF_PRODUCT_PER_PAGE } = useFindorProduct();
-  const { confirmDeleterProduct, messageSuccess, messageError, setMessageSuccess } = useDeleterProduct();
-  const { choiseProductToRemove, id, index, showBox, setShowBox } = useConfirmDeleteProduct();
+  const { confirmDeleterProduct, messageSuccess, messageError, setMessageSuccess, setMessageError } = useDeleterProduct();
+  const { choiseProductToRemove, id, index, showBox, setShowBox, userName } = useConfirmDeleteProduct();
   const [page, setPage] = React.useState<number>(1);
-  
+
   React.useEffect(() => {
     findorProduct({ page });
     setMessageSuccess('');
+    setMessageError(null);
   }, [page]);
 
   const removeProduct = () => {
-    confirmDeleterProduct({ id });
+    confirmDeleterProduct({ id, userName });
     setShowBox(false);
     products?.splice(index, 1);
   };
@@ -38,7 +39,7 @@ export const FindorProduct: React.FC = () => {
           products.map((product, index) => (
             <div
               key={product.id}
-              onClick={() => choiseProductToRemove(product.id, index)}
+              onClick={() => choiseProductToRemove(product.id, index, product.name)}
               className='bg-white rounded-lg shadow-md p-6 border cursor-pointer border-gray-100 hover:shadow-lg transition'
             >
               <h3 className='text-xl font-semibold text-gray-800 mb-2'>{product.name}</h3>

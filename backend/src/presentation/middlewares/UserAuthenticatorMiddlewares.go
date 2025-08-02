@@ -19,12 +19,9 @@ func (u *UserAuthenticatorMiddlewares) Execute(httpContext interfaces.HttpContex
 		httpContext.SendError(err)
 		return
 	}
-
-	idUser, err := u.userAuthenticator.ValidateToken(token)
-	if err != nil {
+	if _, err := u.userAuthenticator.ValidateToken(token); err != nil {
 		httpContext.SendError(err)
 		return
 	}
 
-	httpContext.SetIdentifiers("idUser", idUser)
 }

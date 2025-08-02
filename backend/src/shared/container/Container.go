@@ -1,6 +1,7 @@
 package container
 
 import (
+	"sync"
 	"github.com/marcosfrancomarinho/go-first-project/src/application/usecase"
 	"github.com/marcosfrancomarinho/go-first-project/src/domain/interfaces"
 	"github.com/marcosfrancomarinho/go-first-project/src/infrastructure/auth"
@@ -9,7 +10,6 @@ import (
 	"github.com/marcosfrancomarinho/go-first-project/src/infrastructure/repository"
 	"github.com/marcosfrancomarinho/go-first-project/src/presentation/controllers"
 	"github.com/marcosfrancomarinho/go-first-project/src/presentation/middlewares"
-	"sync"
 )
 
 type Container struct{}
@@ -61,6 +61,7 @@ func (c *Container) Dependencies() *Handlers {
 	deleterProduct := repository.NewGormDeleterProduct()
 	deleterProductUseCase := usecase.NewDeleterProductUseCase(deleterProduct)
 	deleterProductController := controllers.NewDeleterProductController(deleterProductUseCase)
+	
 
 	return &Handlers{
 		registerUserControllers,

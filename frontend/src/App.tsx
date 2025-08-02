@@ -10,9 +10,9 @@ export const App: React.FC = () => {
     <AppProvider dependecies={container.dependencies()}>
       <BrowserRouter>
         <div className='flex flex-col min-h-screen'>
-          <main className='grow'>
+          <div className='grow'>
             <RouterView />
-          </main>
+          </div>
         </div>
       </BrowserRouter>
     </AppProvider>
