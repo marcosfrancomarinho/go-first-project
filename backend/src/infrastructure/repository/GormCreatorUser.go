@@ -4,6 +4,7 @@ import (
 	"github.com/marcosfrancomarinho/go-first-project/src/domain/entities"
 	"github.com/marcosfrancomarinho/go-first-project/src/domain/interfaces"
 	"github.com/marcosfrancomarinho/go-first-project/src/infrastructure/database"
+	"github.com/marcosfrancomarinho/go-first-project/src/shared/exceptions"
 )
 
 type GormCreatorUser struct{}
@@ -23,7 +24,7 @@ func (g *GormCreatorUser) Create(user *entities.UserRegister) error {
 	}
 
 	if result := client.Create(&datas); result.Error != nil {
-		return result.Error
+		return exceptions.ErrUserAlreadyExists
 	}
 	return nil
 }
