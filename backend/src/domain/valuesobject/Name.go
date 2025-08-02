@@ -2,6 +2,7 @@ package valuesobject
 
 import (
 	"errors"
+	"regexp"
 	"strings"
 )
 
@@ -26,11 +27,11 @@ func validateName(name string) error {
 		return errors.New("nome obrigatorio")
 	}
 
-	// isValid := regexp.MustCompile(`^[A-Za-zÀ-ÖØ-öø-ÿ]+(?: [A-Za-zÀ-ÖØ-öø-ÿ]+)*$`)
+	isValid := regexp.MustCompile(`^[A-Za-zÀ-ÖØ-öø-ÿ]+(?: [A-Za-zÀ-ÖØ-öø-ÿ]+)*$`)
 
-	// if !isValid.MatchString(name) {
-	// 	return errors.New("o nome deve conter apenas letras e espaços sem números ou símbolos")
-	// }
+	if !isValid.MatchString(name) {
+		return errors.New("o nome deve conter apenas letras e espaços sem números ou símbolos")
+	}
 
 	return nil
 }
