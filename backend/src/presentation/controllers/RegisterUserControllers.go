@@ -15,9 +15,9 @@ func NewRegisterUserControllers(registerUserUseCase *usecase.RegisterUserUseCase
 }
 
 type RawRegister struct {
-	Name     string
-	Email    string
-	Password string
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
 }
 
 func (r *RegisterUserControllers) Execute(httpContext interfaces.HttpContext) {

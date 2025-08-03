@@ -7,7 +7,7 @@ import (
 )
 
 type RawDeleterProduct struct {
-	Id string
+	Id string `uri:"id"`
 }
 
 type DeleterProductController struct {
@@ -19,16 +19,13 @@ func NewDeleterProductController(deleterProductUseCase *usecase.DeleterProductUs
 }
 
 func (d *DeleterProductController) Execute(httpContext interfaces.HttpContext) {
-
-	id, err := httpContext.GetParams("id")
-
-	if err != nil {
+	var raw RawDeleterProduct
+	if err := httpContext.GetParams(&raw); err != nil {
 		httpContext.SendError(err)
 		return
 	}
 
-	input := &dto.RequestDeleterProductDTO{Id: *id}
-
+	input := &dto.RequestDeleterProductDTO{Id: raw.Id}
 	output, err := d.deleterProductUseCase.Delete(input)
 	if err != nil {
 		httpContext.SendError(err)

@@ -2,7 +2,7 @@ package http
 
 import (
 	"errors"
-	"fmt"
+
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/marcosfrancomarinho/go-first-project/src/domain/interfaces"
@@ -18,7 +18,7 @@ func NewGinHttpContext(ctx *gin.Context) interfaces.HttpContext {
 }
 
 func (g *GinHttpContext) GetBody(input any) error {
-	return g.ctx.ShouldBindJSON(input)
+	return g.ctx.BindJSON(input)
 }
 
 func (g *GinHttpContext) Send(status int, datas any, token ...string) {
@@ -55,26 +55,16 @@ func (g *GinHttpContext) GetToken() string {
 	return token
 }
 
-
-func (g *GinHttpContext) GetParams(key string) (*string, error) {
-	id := g.ctx.Param(key)
-	if len(id) == 0 {
-		return nil, fmt.Errorf("parametro %s não foi fornecido", key)
+func (g *GinHttpContext) GetParams(input any) error {
+	if err := g.ctx.BindUri(input); err != nil {
+		return err
 	}
-	return &id, nil
+	return nil
 }
 
-func (g *GinHttpContext) GetQuery(keys ...string) (map[string]string, error) {
-	queries := make(map[string]string)
-
-	for _, key := range keys {
-		query := g.ctx.Query(key)
-
-		if len(query) == 0 {
-			return nil, fmt.Errorf("query param '%s' inválido ou não definido", key)
-		}
-
-		queries[key] = query
+func (g *GinHttpContext) GetQuery(input any) error {
+	if err := g.ctx.BindQuery(input); err != nil {
+		return err
 	}
-	return queries, nil
+	return nil
 }

@@ -15,9 +15,9 @@ func NewCreatorProductControllers(creatorProductUseCase *usecase.CreatorProductU
 }
 
 type RawCreatorProduct struct {
-	Name     string
-	Price    float64
-	Quantity int
+	Name     string `json:"name"`
+	Price    float64 `json:"price"`
+	Quantity int `json:"quantity"`
 }
 
 func (c *CreatorProductControllers) Execute(httpContext interfaces.HttpContext) {

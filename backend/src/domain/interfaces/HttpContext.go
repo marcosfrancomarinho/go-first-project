@@ -5,6 +5,6 @@ type HttpContext interface {
 	Send(status int, datas any, token ...string)
 	SendError(err error)
 	GetToken() string
-	GetParams(key string) (*string, error)
-	GetQuery(key ...string) (map[string]string, error)
+	GetParams(input any)  error
+	GetQuery(input  any) error
 }
